@@ -47,6 +47,15 @@ dependencies {
     // Required for @Generated annotation (missing in Java <= 1.6; therefore, Android)
     provided 'javax.annotation:jsr250-api:1.0'
 
+    // MaterialDrawer (by mikepenz - https://github.com/mikepenz/MaterialDrawer)
+    compile('com.mikepenz:materialdrawer:5.1.8@aar') {
+        transitive = true
+    }
+    compile 'com.mikepenz:google-material-typeface:2.2.0.1.original@aar'
+    compile 'com.mikepenz:material-design-iconic-typeface:2.2.0.1@aar'
+    compile 'com.mikepenz:fontawesome-typeface:4.5.0.1@aar'
+    compile 'com.mikepenz:ionicons-typeface:2.0.1.1@aar'
+
     //JVM Test
     //JUnit
     testCompile 'junit:junit:4.12'
