@@ -1,6 +1,5 @@
 package bme.msc.cookbook.ui.main;
 
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -62,14 +61,19 @@ public class MainActivity extends AppCompatActivity {
                         int id = (int)drawerItem.getIdentifier();
                         switch (id) {
                             case 1:
+                                Toast.makeText(getApplicationContext(), ((Nameable) drawerItem).getName().getText(), Toast.LENGTH_SHORT).show();
                                 break;
                             case 2:
+                                Toast.makeText(getApplicationContext(), ((Nameable) drawerItem).getName().getText(), Toast.LENGTH_SHORT).show();
                                 break;
                             case 3:
+                                Toast.makeText(getApplicationContext(), ((Nameable) drawerItem).getName().getText(), Toast.LENGTH_SHORT).show();
                                 break;
                             case 4:
+                                Toast.makeText(getApplicationContext(), ((Nameable) drawerItem).getName().getText(), Toast.LENGTH_SHORT).show();
                                 break;
                             case 5:
+                                Toast.makeText(getApplicationContext(), ((Nameable) drawerItem).getName().getText(), Toast.LENGTH_SHORT).show();
                                 break;
                         }
 
