@@ -1,5 +1,6 @@
 package bme.msc.cookbook.ui.main;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -18,6 +19,7 @@ import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.Nameable;
 
 import bme.msc.cookbook.R;
+import bme.msc.cookbook.ui.about.AboutActivity;
 
 public class MainActivity extends AppCompatActivity {
     private Drawer navigationDrawer;
@@ -73,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
                                 Toast.makeText(getApplicationContext(), ((Nameable) drawerItem).getName().getText(), Toast.LENGTH_SHORT).show();
                                 break;
                             case 5:
-                                Toast.makeText(getApplicationContext(), ((Nameable) drawerItem).getName().getText(), Toast.LENGTH_SHORT).show();
+                                startActivity(new Intent(MainActivity.this, AboutActivity.class));
                                 break;
                         }
 
