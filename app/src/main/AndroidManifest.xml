@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="bme.msc.cookbook">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:name=".CookBookApplication"
         android:allowBackup="true"
@@ -16,7 +18,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.about.AboutActivity"></activity>
+        <activity android:name=".ui.about.AboutActivity" android:label="About" />
+        <activity android:name=".ui.newrecipe.NewRecipeActivity" android:label="New recipe" />
+        <activity android:name=".ui.recipedetails.RecipeDetailsActivity" android:label="Details" />
+        <activity android:name=".ui.recipes.RecipesActivity" android:label="Recipes" />
+        <activity android:name=".ui.savedrecipes.SavedRecipesActivity" android:label="Saved recipes" />
+        <activity android:name=".ui.settings.SettingsActivity" android:label="Settings" />
     </application>
 
 </manifest>

@@ -20,6 +20,10 @@ import com.mikepenz.materialdrawer.model.interfaces.Nameable;
 
 import bme.msc.cookbook.R;
 import bme.msc.cookbook.ui.about.AboutActivity;
+import bme.msc.cookbook.ui.newrecipe.NewRecipeActivity;
+import bme.msc.cookbook.ui.recipes.RecipesActivity;
+import bme.msc.cookbook.ui.savedrecipes.SavedRecipesActivity;
+import bme.msc.cookbook.ui.settings.SettingsActivity;
 
 public class MainActivity extends AppCompatActivity {
     private Drawer navigationDrawer;
@@ -30,6 +34,25 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         createNavigationDrawer();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if (navigationDrawer != null) {
+            navigationDrawer.setSelection(-1, false);
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        if (navigationDrawer != null) {
+            navigationDrawer.closeDrawer();
+            navigationDrawer.setSelection(-1, false);
+        }
     }
 
     private void createNavigationDrawer() {
@@ -63,28 +86,26 @@ public class MainActivity extends AppCompatActivity {
                         int id = (int)drawerItem.getIdentifier();
                         switch (id) {
                             case 1:
-                                Toast.makeText(getApplicationContext(), ((Nameable) drawerItem).getName().getText(), Toast.LENGTH_SHORT).show();
+                                startActivity(new Intent(MainActivity.this, RecipesActivity.class));
                                 break;
                             case 2:
-                                Toast.makeText(getApplicationContext(), ((Nameable) drawerItem).getName().getText(), Toast.LENGTH_SHORT).show();
+                                startActivity(new Intent(MainActivity.this, NewRecipeActivity.class));
                                 break;
                             case 3:
-                                Toast.makeText(getApplicationContext(), ((Nameable) drawerItem).getName().getText(), Toast.LENGTH_SHORT).show();
+                                startActivity(new Intent(MainActivity.this, SavedRecipesActivity.class));
                                 break;
                             case 4:
-                                Toast.makeText(getApplicationContext(), ((Nameable) drawerItem).getName().getText(), Toast.LENGTH_SHORT).show();
+                                startActivity(new Intent(MainActivity.this, SettingsActivity.class));
                                 break;
                             case 5:
                                 startActivity(new Intent(MainActivity.this, AboutActivity.class));
                                 break;
                         }
 
-                        navigationDrawer.closeDrawer();
-                        navigationDrawer.setSelection(-1, false);
+                        overridePendingTransition(R.anim.fadein, R.anim.fadeout);
                         return true;
                     }
                 })
-                .withSelectedItem(-1)
                 .build();
     }
 }

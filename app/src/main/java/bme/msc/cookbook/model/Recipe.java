@@ -6,23 +6,23 @@ import com.google.gson.annotations.SerializedName;
 public class Recipe {
     @SerializedName("id")
     @Expose
-    private String id;
+    private int id;
 
-    @SerializedName("title")
+    @SerializedName("name")
     @Expose
-    private String title;
+    private String name;
 
     @SerializedName("img_url")
     @Expose
     private String imgUrl;
 
+    @SerializedName("cooking_time")
+    @Expose
+    private String cookingTime;
+
     @SerializedName("rating")
     @Expose
     private double rating;
-
-    @SerializedName("cooking_time")
-    @Expose
-    private int cookingTime;
 
     @SerializedName("ingredients")
     @Expose
@@ -32,44 +32,54 @@ public class Recipe {
     @Expose
     private String directions;
 
-    public String getId() {
+    @SerializedName("category")
+    @Expose
+    private String category;
+
+    public int getId() {
         return id;
     }
-    public void setId(String id) {
+
+    public void setId(int id) {
         this.id = id;
     }
 
-    public String getTitle() {
-        return title;
+    public String getName() {
+        return name;
     }
-    public void setTitle(String title) {
-        this.title = title;
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getImgUrl() {
         return imgUrl;
     }
+
     public void setImgUrl(String imgUrl) {
         this.imgUrl = imgUrl;
+    }
+
+    public String getCookingTime() {
+        return cookingTime;
+    }
+
+    public void setCookingTime(String cookingTime) {
+        this.cookingTime = cookingTime;
     }
 
     public double getRating() {
         return rating;
     }
+
     public void setRating(double rating) {
         this.rating = rating;
-    }
-
-    public int getCookingTime() {
-        return cookingTime;
-    }
-    public void setCookingTime(int cookingTime) {
-        this.cookingTime = cookingTime;
     }
 
     public String getIngredients() {
         return ingredients;
     }
+
     public void setIngredients(String ingredients) {
         this.ingredients = ingredients;
     }
@@ -77,7 +87,16 @@ public class Recipe {
     public String getDirections() {
         return directions;
     }
+
     public void setDirections(String directions) {
         this.directions = directions;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 }

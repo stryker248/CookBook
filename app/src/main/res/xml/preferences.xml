@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory
+        android:title="User settings"
+        android:key="pref_key_storage_settings">
+        <EditTextPreference
+            android:key="pref_key_user_email"
+            android:summary="Email address for new recipes"
+            android:title="Email address"
+            android:defaultValue=""/>
+    </PreferenceCategory>
+</PreferenceScreen>
