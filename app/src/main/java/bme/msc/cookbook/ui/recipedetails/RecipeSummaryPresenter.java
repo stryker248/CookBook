@@ -28,7 +28,7 @@ public class RecipeSummaryPresenter extends Presenter<RecipeDetailsScreen> {
         super.detachScreen();
     }
 
-    public void rateRecipe(int id, int rating) {
+    public void rateRecipe(Long id, int rating) {
         //TODO: recept értékelése
     }
 }

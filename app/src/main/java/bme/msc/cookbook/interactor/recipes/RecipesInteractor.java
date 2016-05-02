@@ -89,7 +89,7 @@ public class RecipesInteractor {
         }
     }
 
-    public void rateRecipe(int id, int rating) {
+    public void rateRecipe(Long id, int rating) {
         NewRating newRating = new NewRating(id, rating);
         Call<Recipe> queryCall = recipesApi.rateRecipe(newRating);
 
