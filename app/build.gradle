@@ -29,10 +29,6 @@ android {
             applicationId "bme.msc.cookbook.dev"
             versionName "1.0-dev"
         }
-        prod {
-            applicationId "bme.msc.cookbook.prod"
-            versionName "1.0-prod"
-        }
     }
     packagingOptions {
         exclude 'META-INF/services/javax.annotation.processing.Processor'
