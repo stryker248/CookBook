@@ -3,16 +3,17 @@ package bme.msc.cookbook.interactor.recipes.event;
 import java.util.List;
 
 import bme.msc.cookbook.model.apiresult.Recipe;
+import bme.msc.cookbook.model.orm.FavouriteRecipe;
 
-public class GetRecipesEvent {
+public class GetFavouriteRecipesEvent {
     private int code;
-    private List<Recipe> recipes;
+    private List<FavouriteRecipe> recipes;
     private Throwable throwable;
 
-    public GetRecipesEvent() {
+    public GetFavouriteRecipesEvent() {
     }
 
-    public GetRecipesEvent(int code, List<Recipe> recipes, Throwable throwable) {
+    public GetFavouriteRecipesEvent(int code, List<FavouriteRecipe> recipes, Throwable throwable) {
         this.code = code;
         this.recipes = recipes;
         this.throwable = throwable;
@@ -26,11 +27,11 @@ public class GetRecipesEvent {
         this.code = code;
     }
 
-    public List<Recipe> getRecipes() {
+    public List<FavouriteRecipe> getRecipes() {
         return recipes;
     }
 
-    public void setRecipes(List<Recipe> recipes) {
+    public void setRecipes(List<FavouriteRecipe> recipes) {
         this.recipes = recipes;
     }
 

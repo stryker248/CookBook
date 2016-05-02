@@ -1,6 +1,6 @@
 package bme.msc.cookbook.interactor.recipes.event;
 
-import bme.msc.cookbook.model.Recipe;
+import bme.msc.cookbook.model.apiresult.Recipe;
 
 public class AddRecipeEvent {
     private int code;

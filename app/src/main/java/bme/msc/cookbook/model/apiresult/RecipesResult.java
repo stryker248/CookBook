@@ -5,10 +5,8 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-import bme.msc.cookbook.model.Recipe;
-
 public class RecipesResult {
-    @SerializedName("artists")
+    @SerializedName("recipes")
     @Expose
     private List<Recipe> recipes;
 

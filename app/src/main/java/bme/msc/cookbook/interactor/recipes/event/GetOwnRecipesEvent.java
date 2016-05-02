@@ -2,17 +2,18 @@ package bme.msc.cookbook.interactor.recipes.event;
 
 import java.util.List;
 
-import bme.msc.cookbook.model.Recipe;
+import bme.msc.cookbook.model.apiresult.Recipe;
+import bme.msc.cookbook.model.orm.OwnRecipe;
 
-public class LoadOwnRecipesEvent {
+public class GetOwnRecipesEvent {
     private int code;
-    private List<Recipe> recipes;
+    private List<OwnRecipe> recipes;
     private Throwable throwable;
 
-    public LoadOwnRecipesEvent() {
+    public GetOwnRecipesEvent() {
     }
 
-    public LoadOwnRecipesEvent(int code, List<Recipe> recipes, Throwable throwable) {
+    public GetOwnRecipesEvent(int code, List<OwnRecipe> recipes, Throwable throwable) {
         this.code = code;
         this.recipes = recipes;
         this.throwable = throwable;
@@ -26,11 +27,11 @@ public class LoadOwnRecipesEvent {
         this.code = code;
     }
 
-    public List<Recipe> getRecipes() {
+    public List<OwnRecipe> getRecipes() {
         return recipes;
     }
 
-    public void setRecipes(List<Recipe> recipes) {
+    public void setRecipes(List<OwnRecipe> recipes) {
         this.recipes = recipes;
     }
 

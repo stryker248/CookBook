@@ -3,7 +3,10 @@ package bme.msc.cookbook;
 import javax.inject.Singleton;
 
 import bme.msc.cookbook.interactor.InteractorModule;
+import bme.msc.cookbook.interactor.categories.CategoriesInteractor;
 import bme.msc.cookbook.interactor.recipes.RecipesInteractor;
+import bme.msc.cookbook.manager.ManagerModule;
+import bme.msc.cookbook.manager.RecipesManager;
 import bme.msc.cookbook.network.NetworkModule;
 import bme.msc.cookbook.ui.UIModule;
 import bme.msc.cookbook.ui.main.MainActivity;
@@ -30,7 +33,7 @@ import bme.msc.cookbook.ui.savedrecipes.SavedRecipesActivity;
 import dagger.Component;
 
 @Singleton
-@Component(modules = {UIModule.class, NetworkModule.class, InteractorModule.class})
+@Component(modules = {UIModule.class, NetworkModule.class, InteractorModule.class, ManagerModule.class})
 public interface CookBookApplicationComponent {
     void inject(MainActivity mainActivity);
     void inject(MainFragment mainFragment);
@@ -59,4 +62,7 @@ public interface CookBookApplicationComponent {
     void inject(RecipeDirectionsPresenter recipeDirectionsPresenter);
 
     void inject(RecipesInteractor recipesInteractor);
+    void inject(CategoriesInteractor categoriesInteractor);
+
+    void inject(RecipesManager recipesManager);
 }

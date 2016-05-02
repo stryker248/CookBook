@@ -11,7 +11,7 @@ import javax.inject.Inject;
 import bme.msc.cookbook.CookBookApplication;
 import bme.msc.cookbook.di.Network;
 import bme.msc.cookbook.interactor.recipes.RecipesInteractor;
-import bme.msc.cookbook.interactor.recipes.event.LoadFavouriteRecipesEvent;
+import bme.msc.cookbook.interactor.recipes.event.GetFavouriteRecipesEvent;
 import bme.msc.cookbook.ui.Presenter;
 
 public class MainPresenter extends Presenter<MainScreen> {
@@ -39,13 +39,13 @@ public class MainPresenter extends Presenter<MainScreen> {
         networkExecutor.execute(new Runnable() {
             @Override
             public void run() {
-                recipesInteractor.loadFavouriteRecipes();
+                recipesInteractor.getFavouriteRecipes();
             }
         });
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEventMainThread(final LoadFavouriteRecipesEvent event) {
+    public void onEventMainThread(final GetFavouriteRecipesEvent event) {
         if (event.getThrowable() != null) {
             event.getThrowable().printStackTrace();
             if (screen != null) {

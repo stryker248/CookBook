@@ -3,7 +3,6 @@ package bme.msc.cookbook.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,14 +14,15 @@ import com.bumptech.glide.Glide;
 import java.util.List;
 
 import bme.msc.cookbook.R;
-import bme.msc.cookbook.model.Recipe;
+import bme.msc.cookbook.model.RecipeBase;
+import bme.msc.cookbook.model.apiresult.Recipe;
 import bme.msc.cookbook.ui.recipedetails.RecipeDetailsActivity;
 
 public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.ViewHolder> {
     private Context context;
-    private List<Recipe> recipesList;
+    private List<? extends RecipeBase> recipesList;
 
-    public RecipesAdapter(Context context, List<Recipe> recipesList) {
+    public RecipesAdapter(Context context, List<? extends RecipeBase> recipesList) {
         this.context = context;
         this.recipesList = recipesList;
     }
@@ -35,14 +35,14 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Recipe recipe = recipesList.get(position);
+        RecipeBase recipe = recipesList.get(position);
 
         Glide.with(context).load(recipe.getImgUrl()).into(holder.ivImage);
         holder.tvName.setText(recipe.getName());
         holder.tvCategory.setText(recipe.getCategory());
         holder.tvRating.setText(Double.toString(recipe.getRating()));
         holder.tvCookingTime.setText(recipe.getCookingTime());
-        holder.tvId.setText(Integer.toString(recipe.getId()));
+        holder.tvId.setText(Long.toString(recipe.getId()));
         holder.tvImgUrl.setText(recipe.getImgUrl());
         holder.tvIngredients.setText(recipe.getIngredients());
         holder.tvDirections.setText(recipe.getDirections());

@@ -12,7 +12,7 @@ import bme.msc.cookbook.CookBookApplication;
 import bme.msc.cookbook.di.Network;
 import bme.msc.cookbook.interactor.recipes.RecipesInteractor;
 import bme.msc.cookbook.interactor.recipes.event.AddRecipeEvent;
-import bme.msc.cookbook.model.NewRecipe;
+import bme.msc.cookbook.model.apimodel.NewRecipe;
 import bme.msc.cookbook.ui.Presenter;
 
 public class NewRecipePresenter extends Presenter<NewRecipeScreen> {

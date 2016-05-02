@@ -5,7 +5,7 @@
     <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
-        android:name=".CookBookApplication"
+        android:name="com.orm.SugarApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/application_name"
@@ -24,6 +24,11 @@
         <activity android:name=".ui.recipes.RecipesActivity" android:label="Recipes" />
         <activity android:name=".ui.savedrecipes.SavedRecipesActivity" android:label="Saved recipes" />
         <activity android:name=".ui.settings.SettingsActivity" android:label="Settings" />
+
+        <meta-data android:name="DATABASE" android:value="cookbookdb.db" />
+        <meta-data android:name="VERSION" android:value="1" />
+        <meta-data android:name="QUERY_LOG" android:value="true" />
+        <meta-data android:name="DOMAIN_PACKAGE_NAME" android:value="bme.msc.cookbook.model.orm" />
     </application>
 
 </manifest>

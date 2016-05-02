@@ -20,6 +20,20 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    productFlavors {
+        mock {
+            applicationId "bme.msc.cookbook.mock"
+            versionName "1.0-mock"
+        }
+        dev {
+            applicationId "bme.msc.cookbook.dev"
+            versionName "1.0-dev"
+        }
+        prod {
+            applicationId "bme.msc.cookbook.prod"
+            versionName "1.0-prod"
+        }
+    }
     packagingOptions {
         exclude 'META-INF/services/javax.annotation.processing.Processor'
         exclude 'META-INF/LICENSE.txt'
@@ -75,4 +89,6 @@ dependencies {
     compile 'com.mikepenz:fontawesome-typeface:4.5.0.1@aar'
     compile 'com.mikepenz:ionicons-typeface:2.0.1.1@aar'
     compile 'com.android.support:support-v4:23.3.0'
+
+    compile 'com.github.satyan:sugar:1.4'
 }

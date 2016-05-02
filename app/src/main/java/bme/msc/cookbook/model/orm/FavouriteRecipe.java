@@ -1,9 +1,14 @@
-package bme.msc.cookbook.model;
+package bme.msc.cookbook.model.orm;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.orm.SugarRecord;
 
-public class NewRecipe {
+import java.util.Date;
+
+import bme.msc.cookbook.model.RecipeBase;
+
+public class FavouriteRecipe extends SugarRecord implements RecipeBase {
     @SerializedName("name")
     @Expose
     private String name;
@@ -16,6 +21,10 @@ public class NewRecipe {
     @Expose
     private String cookingTime;
 
+    @SerializedName("rating")
+    @Expose
+    private double rating;
+
     @SerializedName("ingredients")
     @Expose
     private String ingredients;
@@ -24,13 +33,28 @@ public class NewRecipe {
     @Expose
     private String directions;
 
-    @SerializedName("created_by")
+    @SerializedName("category")
     @Expose
-    private String createdBy;
+    private String category;
 
-    @SerializedName("category_id")
+    @SerializedName("lastDate")
     @Expose
-    private int categoryId;
+    private Date lastDate;
+
+    public FavouriteRecipe() {
+    }
+
+    public FavouriteRecipe(String name, String imgUrl, String cookingTime, double rating,
+                  String ingredients, String directions, String category, Date lastDate) {
+        this.name = name;
+        this.imgUrl = imgUrl;
+        this.cookingTime = cookingTime;
+        this.rating = rating;
+        this.ingredients = ingredients;
+        this.directions = directions;
+        this.category = category;
+        this.lastDate = lastDate;
+    }
 
     public String getName() {
         return name;
@@ -56,6 +80,14 @@ public class NewRecipe {
         this.cookingTime = cookingTime;
     }
 
+    public double getRating() {
+        return rating;
+    }
+
+    public void setRating(double rating) {
+        this.rating = rating;
+    }
+
     public String getIngredients() {
         return ingredients;
     }
@@ -72,19 +104,11 @@ public class NewRecipe {
         this.directions = directions;
     }
 
-    public String getCreatedBy() {
-        return createdBy;
+    public String getCategory() {
+        return category;
     }
 
-    public void setCreatedBy(String createdBy) {
-        this.createdBy = createdBy;
-    }
-
-    public int getCategoryId() {
-        return categoryId;
-    }
-
-    public void setCategoryId(int categoryId) {
-        this.categoryId = categoryId;
+    public void setCategory(String category) {
+        this.category = category;
     }
 }

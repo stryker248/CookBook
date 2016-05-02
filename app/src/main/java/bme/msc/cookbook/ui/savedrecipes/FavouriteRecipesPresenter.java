@@ -11,10 +11,10 @@ import javax.inject.Inject;
 import bme.msc.cookbook.CookBookApplication;
 import bme.msc.cookbook.di.Network;
 import bme.msc.cookbook.interactor.recipes.RecipesInteractor;
-import bme.msc.cookbook.interactor.recipes.event.LoadFavouriteRecipesEvent;
+import bme.msc.cookbook.interactor.recipes.event.GetFavouriteRecipesEvent;
 import bme.msc.cookbook.ui.Presenter;
 
-public class FavouriteRecipesPresenter extends Presenter<SavedRecipesScreen> {
+public class FavouriteRecipesPresenter extends Presenter<FavouriteRecipesScreen> {
     @Inject
     @Network
     Executor networkExecutor;
@@ -23,7 +23,7 @@ public class FavouriteRecipesPresenter extends Presenter<SavedRecipesScreen> {
     RecipesInteractor recipesInteractor;
 
     @Override
-    public void attachScreen(SavedRecipesScreen screen) {
+    public void attachScreen(FavouriteRecipesScreen screen) {
         super.attachScreen(screen);
         CookBookApplication.injector.inject(this);
         EventBus.getDefault().register(this);
@@ -39,13 +39,22 @@ public class FavouriteRecipesPresenter extends Presenter<SavedRecipesScreen> {
         networkExecutor.execute(new Runnable() {
             @Override
             public void run() {
-                recipesInteractor.loadFavouriteRecipes();
+                recipesInteractor.getFavouriteRecipes();
+            }
+        });
+    }
+
+    public void removeRecipeFromFavourites(final long id) {
+        networkExecutor.execute(new Runnable() {
+            @Override
+            public void run() {
+                recipesInteractor.removeRecipeFromFavourites(id);
             }
         });
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEventMainThread(final LoadFavouriteRecipesEvent event) {
+    public void onEventMainThread(final GetFavouriteRecipesEvent event) {
         if (event.getThrowable() != null) {
             event.getThrowable().printStackTrace();
             if (screen != null) {

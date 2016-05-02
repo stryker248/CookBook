@@ -12,6 +12,7 @@ import bme.msc.cookbook.CookBookApplication;
 import bme.msc.cookbook.di.Network;
 import bme.msc.cookbook.interactor.recipes.RecipesInteractor;
 import bme.msc.cookbook.interactor.recipes.event.GetRecipesEvent;
+import bme.msc.cookbook.model.apiresult.Recipe;
 import bme.msc.cookbook.ui.Presenter;
 
 public class RecipesPresenter extends Presenter<RecipesScreen> {
@@ -40,6 +41,24 @@ public class RecipesPresenter extends Presenter<RecipesScreen> {
             @Override
             public void run() {
                 recipesInteractor.getRecipes();
+            }
+        });
+    }
+
+    public void searchRecipes(final String searchText) {
+        networkExecutor.execute(new Runnable() {
+            @Override
+            public void run() {
+                recipesInteractor.searchRecipes(searchText);
+            }
+        });
+    }
+
+    public void addRecipeToFavourites(final Recipe recipe) {
+        networkExecutor.execute(new Runnable() {
+            @Override
+            public void run() {
+                recipesInteractor.addRecipeToFavourites(recipe);
             }
         });
     }

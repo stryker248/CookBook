@@ -19,12 +19,13 @@ import javax.inject.Inject;
 import bme.msc.cookbook.CookBookApplication;
 import bme.msc.cookbook.R;
 import bme.msc.cookbook.adapter.RecipesAdapter;
-import bme.msc.cookbook.model.Recipe;
+import bme.msc.cookbook.model.apiresult.Recipe;
+import bme.msc.cookbook.model.orm.FavouriteRecipe;
 
 public class MainFragment extends Fragment implements MainScreen {
     private RecyclerView recyclerViewRecipes;
     private TextView tvEmpty;
-    private List<Recipe> recipesList;
+    private List<FavouriteRecipe> recipesList;
     private RecipesAdapter recipesAdapter;
 
     @Inject
@@ -72,7 +73,7 @@ public class MainFragment extends Fragment implements MainScreen {
     }
 
     @Override
-    public void showRecipes(List<Recipe> recipes) {
+    public void showRecipes(List<FavouriteRecipe> recipes) {
         recipesList.clear();
         recipesList.addAll(recipes);
         recipesAdapter.notifyDataSetChanged();

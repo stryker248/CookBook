@@ -1,13 +1,12 @@
-package bme.msc.cookbook.model;
+package bme.msc.cookbook.model.orm;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.orm.SugarRecord;
 
-public class Recipe {
-    @SerializedName("id")
-    @Expose
-    private int id;
+import bme.msc.cookbook.model.RecipeBase;
 
+public class OwnRecipe extends SugarRecord implements RecipeBase {
     @SerializedName("name")
     @Expose
     private String name;
@@ -36,12 +35,18 @@ public class Recipe {
     @Expose
     private String category;
 
-    public int getId() {
-        return id;
+    public OwnRecipe() {
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public OwnRecipe(String name, String imgUrl, String cookingTime, double rating,
+                           String ingredients, String directions, String category) {
+        this.name = name;
+        this.imgUrl = imgUrl;
+        this.cookingTime = cookingTime;
+        this.rating = rating;
+        this.ingredients = ingredients;
+        this.directions = directions;
+        this.category = category;
     }
 
     public String getName() {

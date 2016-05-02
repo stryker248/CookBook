@@ -6,7 +6,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,7 +20,7 @@ import javax.inject.Inject;
 import bme.msc.cookbook.CookBookApplication;
 import bme.msc.cookbook.R;
 import bme.msc.cookbook.adapter.RecipesAdapter;
-import bme.msc.cookbook.model.Recipe;
+import bme.msc.cookbook.model.apiresult.Recipe;
 
 public class RecipesFragment extends Fragment implements RecipesScreen {
     private RecyclerView recyclerViewRecipes;

@@ -1,7 +1,8 @@
-package bme.msc.cookbook.model;
+package bme.msc.cookbook.model.apiresult;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.orm.SugarRecord;
 
 public class Category {
     @SerializedName("id")
@@ -12,10 +13,10 @@ public class Category {
     @Expose
     private String name;
 
-    public Category(){
+    public Category() {
     }
 
-    public Category(int id, String name){
+    public Category(int id, String name) {
         this.id = id;
         this.name = name;
     }
@@ -23,6 +24,7 @@ public class Category {
     public int getId() {
         return id;
     }
+
     public void setId(int id) {
         this.id = id;
     }

@@ -1,6 +1,6 @@
 package bme.msc.cookbook.ui.newrecipe;
 
-import bme.msc.cookbook.model.Recipe;
+import bme.msc.cookbook.model.apiresult.Recipe;
 
 public interface NewRecipeScreen {
     //TODO kitalálni

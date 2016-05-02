@@ -24,4 +24,10 @@ public class NetworkModule {
     public RecipesApi provideRecipesApi(Retrofit retrofit) {
         return retrofit.create(RecipesApi.class);
     }
+
+    @Provides
+    @Singleton
+    public CategoriesApi provideCategoriesApi(Retrofit retrofit) {
+        return retrofit.create(CategoriesApi.class);
+    }
 }
