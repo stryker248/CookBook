@@ -4,9 +4,9 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class NewRating {
-    @SerializedName("recipe_id")
+    @SerializedName("id")
     @Expose
-    private int recipeId;
+    private Long id;
 
     @SerializedName("rating")
     @Expose
@@ -15,17 +15,17 @@ public class NewRating {
     public NewRating() {
     }
 
-    public NewRating(int recipeId, int rating) {
-        this.recipeId = recipeId;
+    public NewRating(Long id, int rating) {
+        this.id = id;
         this.rating = rating;
     }
 
-    public int getRecipeId() {
-        return recipeId;
+    public Long getRecipeId() {
+        return id;
     }
 
-    public void setRecipeId(int recipeId) {
-        this.recipeId = recipeId;
+    public void setRecipeId(Long id) {
+        this.id = id;
     }
 
     public int getRating() {
