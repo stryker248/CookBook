@@ -33,11 +33,11 @@
                 android:text="Category" />
 
             <TextView
-                android:id="@+id/recipedetails_cookingTime"
+                android:id="@+id/recipedetails_totalTime"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingTop="20dp"
-                android:text="CookingTime" />
+                android:text="TotalTime" />
 
             <RatingBar
                 android:id="@+id/recipedetails_rating"

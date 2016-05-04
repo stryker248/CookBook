@@ -41,7 +41,7 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.ViewHold
         holder.tvName.setText(recipe.getName());
         holder.tvCategory.setText(recipe.getCategory());
         holder.tvRating.setText(Double.toString(recipe.getRating()));
-        holder.tvCookingTime.setText(recipe.getCookingTime());
+        holder.tvTotalTime.setText(recipe.getTotalTime());
         holder.tvId.setText(Long.toString(recipe.getId()));
         holder.tvImgUrl.setText(recipe.getImgUrl());
         holder.tvIngredients.setText(recipe.getIngredients());
@@ -58,7 +58,7 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.ViewHold
         public TextView tvName;
         public TextView tvCategory;
         public TextView tvRating;
-        public TextView tvCookingTime;
+        public TextView tvTotalTime;
         public TextView tvId;
         public TextView tvImgUrl;
         public TextView tvIngredients;
@@ -73,7 +73,7 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.ViewHold
             tvName = (TextView) itemView.findViewById(R.id.cardRecipe_tvName);
             tvCategory = (TextView) itemView.findViewById(R.id.cardRecipe_tvCategory);
             tvRating = (TextView) itemView.findViewById(R.id.cardRecipe_tvRating);
-            tvCookingTime = (TextView) itemView.findViewById(R.id.cardRecipe_tvCookingTime);
+            tvTotalTime = (TextView) itemView.findViewById(R.id.cardRecipe_tvTotalTime);
             tvId = (TextView) itemView.findViewById(R.id.cardRecipe_tvId);
             tvImgUrl = (TextView) itemView.findViewById(R.id.cardRecipe_tvImgUrl);
             tvIngredients = (TextView) itemView.findViewById(R.id.cardRecipe_tvIngredients);
@@ -88,7 +88,7 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.ViewHold
             intent.putExtra("category", ((TextView) itemView.findViewById(R.id.cardRecipe_tvCategory)).getText());
             intent.putExtra("imgurl", ((TextView) itemView.findViewById(R.id.cardRecipe_tvImgUrl)).getText());
             intent.putExtra("rating", ((TextView) itemView.findViewById(R.id.cardRecipe_tvRating)).getText());
-            intent.putExtra("cookingtime", ((TextView) itemView.findViewById(R.id.cardRecipe_tvCookingTime)).getText());
+            intent.putExtra("totaltime", ((TextView) itemView.findViewById(R.id.cardRecipe_tvTotalTime)).getText());
             intent.putExtra("ingredients", ((TextView) itemView.findViewById(R.id.cardRecipe_tvIngredients)).getText());
             intent.putExtra("directions", ((TextView) itemView.findViewById(R.id.cardRecipe_tvDirections)).getText());
             v.getContext().startActivity(intent);

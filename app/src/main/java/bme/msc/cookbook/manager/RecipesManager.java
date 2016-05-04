@@ -23,7 +23,7 @@ public class RecipesManager {
             FavouriteRecipe newRecipe = new FavouriteRecipe(
                     recipe.getName(),
                     recipe.getImgUrl(),
-                    recipe.getCookingTime(),
+                    recipe.getTotalTime(),
                     recipe.getRating(),
                     recipe.getIngredients(),
                     recipe.getDirections(),

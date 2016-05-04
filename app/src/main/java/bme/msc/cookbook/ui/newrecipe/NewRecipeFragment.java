@@ -28,7 +28,7 @@ import bme.msc.cookbook.ui.recipedetails.RecipeDetailsActivity;
 public class NewRecipeFragment extends Fragment implements NewRecipeScreen {
     private EditText etName;
     private EditText etImgUrl;
-    private EditText etCookingTime;
+    private EditText etTotalTime;
     private Spinner spnnrCategory;
     private EditText etIngredients;
     private EditText etDirections;
@@ -59,7 +59,7 @@ public class NewRecipeFragment extends Fragment implements NewRecipeScreen {
 
         etName = (EditText) view.findViewById(R.id.newrecipe_etName);
         etImgUrl = (EditText) view.findViewById(R.id.newrecipe_etImgUrl);
-        etCookingTime = (EditText) view.findViewById(R.id.newrecipe_etCookingTime);
+        etTotalTime = (EditText) view.findViewById(R.id.newrecipe_etTotalTime);
         spnnrCategory = (Spinner) view.findViewById(R.id.newrecipe_spnnrCategory);
         etIngredients = (EditText) view.findViewById(R.id.newrecipe_etIngredients);
         etDirections = (EditText) view.findViewById(R.id.newrecipe_etDirections);
@@ -81,7 +81,7 @@ public class NewRecipeFragment extends Fragment implements NewRecipeScreen {
                 NewRecipe newRecipe = new NewRecipe();
                 newRecipe.setName(etName.getText().toString());
                 newRecipe.setImgUrl(etImgUrl.getText().toString());
-                newRecipe.setCookingTime(etCookingTime.getText().toString());
+                newRecipe.setTotalTime(etTotalTime.getText().toString());
                 newRecipe.setIngredients(etIngredients.getText().toString());
                 newRecipe.setDirections(etDirections.getText().toString());
                 newRecipe.setCreatedBy("testuser"); //TODO: módosítani beállításokra
@@ -102,7 +102,7 @@ public class NewRecipeFragment extends Fragment implements NewRecipeScreen {
         intent.putExtra("category", recipe.getCategory());
         intent.putExtra("imgurl", recipe.getImgUrl());
         intent.putExtra("rating", Double.toString(recipe.getRating()));
-        intent.putExtra("cookingtime", recipe.getCookingTime());
+        intent.putExtra("totaltime", recipe.getTotalTime());
         intent.putExtra("ingredients", recipe.getIngredients());
         intent.putExtra("directions", recipe.getDirections());
         getContext().startActivity(intent);

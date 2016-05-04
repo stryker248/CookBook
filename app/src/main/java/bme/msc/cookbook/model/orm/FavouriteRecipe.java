@@ -17,9 +17,9 @@ public class FavouriteRecipe extends SugarRecord implements RecipeBase {
     @Expose
     private String imgUrl;
 
-    @SerializedName("cooking_time")
+    @SerializedName("total_time")
     @Expose
-    private String cookingTime;
+    private String totalTime;
 
     @SerializedName("rating")
     @Expose
@@ -44,11 +44,11 @@ public class FavouriteRecipe extends SugarRecord implements RecipeBase {
     public FavouriteRecipe() {
     }
 
-    public FavouriteRecipe(String name, String imgUrl, String cookingTime, double rating,
+    public FavouriteRecipe(String name, String imgUrl, String totalTime, double rating,
                   String ingredients, String directions, String category, Date lastDate) {
         this.name = name;
         this.imgUrl = imgUrl;
-        this.cookingTime = cookingTime;
+        this.totalTime = totalTime;
         this.rating = rating;
         this.ingredients = ingredients;
         this.directions = directions;
@@ -72,12 +72,12 @@ public class FavouriteRecipe extends SugarRecord implements RecipeBase {
         this.imgUrl = imgUrl;
     }
 
-    public String getCookingTime() {
-        return cookingTime;
+    public String getTotalTime() {
+        return totalTime;
     }
 
-    public void setCookingTime(String cookingTime) {
-        this.cookingTime = cookingTime;
+    public void setTotalTime(String totalTime) {
+        this.totalTime = totalTime;
     }
 
     public double getRating() {

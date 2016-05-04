@@ -50,17 +50,17 @@ public class RecipeSummaryFragment extends Fragment implements RecipeDetailsScre
         String imgUrl = intentExtras.getString("imgurl");
         String category = intentExtras.getString("category");
         String rating = intentExtras.getString("rating");
-        String cookingtime = intentExtras.getString("cookingtime");
+        String totalTime = intentExtras.getString("totaltime");
 
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(name);
         ImageView ivImage = (ImageView) view.findViewById(R.id.recipedetails_image);
         TextView tvCategory = (TextView) view.findViewById(R.id.recipedetails_category);
-        TextView tvCookingTime = (TextView) view.findViewById(R.id.recipedetails_cookingTime);
+        TextView tvTotalTime = (TextView) view.findViewById(R.id.recipedetails_totalTime);
         RatingBar rbRating = (RatingBar) view.findViewById(R.id.recipedetails_rating);
 
         Glide.with(getContext()).load(imgUrl).into(ivImage);
         tvCategory.setText(category);
-        tvCookingTime.setText("Cooking time: " + cookingtime);
+        tvTotalTime.setText("Total time: " + totalTime);
         rbRating.setRating(Float.parseFloat(rating));
 
         Log.i("CookBookLog", "Rating: " + rbRating.getRating());

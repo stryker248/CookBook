@@ -7,7 +7,7 @@ public interface RecipeBase {
 
     String getImgUrl();
 
-    String getCookingTime();
+    String getTotalTime();
 
     double getRating();
 

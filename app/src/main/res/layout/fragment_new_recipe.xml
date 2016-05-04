@@ -49,10 +49,10 @@
                 android:paddingTop="20dp">
 
                 <EditText
-                    android:id="@+id/newrecipe_etCookingTime"
+                    android:id="@+id/newrecipe_etTotalTime"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Cooking time"
+                    android:hint="Total time"
                     android:maxLines="1" />
 
             </android.support.design.widget.TextInputLayout>
