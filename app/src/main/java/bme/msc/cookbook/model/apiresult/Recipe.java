@@ -24,7 +24,7 @@ public class Recipe implements RecipeBase {
 
     @SerializedName("rating")
     @Expose
-    private double rating;
+    private float rating;
 
     @SerializedName("ingredients")
     @Expose
@@ -41,7 +41,7 @@ public class Recipe implements RecipeBase {
     public Recipe() {
     }
 
-    public Recipe(Long id, String name, String imgUrl, String totalTime, double rating,
+    public Recipe(Long id, String name, String imgUrl, String totalTime, float rating,
                   String ingredients, String directions, String category) {
         this.id = id;
         this.name = name;
@@ -81,11 +81,11 @@ public class Recipe implements RecipeBase {
         this.totalTime = totalTime;
     }
 
-    public double getRating() {
+    public float getRating() {
         return rating;
     }
 
-    public void setRating(double rating) {
+    public void setRating(float rating) {
         this.rating = rating;
     }
 

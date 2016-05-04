@@ -19,8 +19,11 @@ import javax.inject.Inject;
 
 import bme.msc.cookbook.CookBookApplication;
 import bme.msc.cookbook.R;
+import bme.msc.cookbook.model.apiresult.Recipe;
 
 public class RecipeSummaryFragment extends Fragment implements RecipeDetailsScreen {
+    private View view;
+
     @Inject
     RecipeSummaryPresenter recipeSummaryPresenter;
 
@@ -42,7 +45,7 @@ public class RecipeSummaryFragment extends Fragment implements RecipeDetailsScre
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_recipe_summary, container, false);
+        view = inflater.inflate(R.layout.fragment_recipe_summary, container, false);
 
         Bundle intentExtras = getActivity().getIntent().getExtras();
         String id = intentExtras.getString("id");
@@ -63,13 +66,17 @@ public class RecipeSummaryFragment extends Fragment implements RecipeDetailsScre
         tvTotalTime.setText("Total time: " + totalTime);
         rbRating.setRating(Float.parseFloat(rating));
 
-        Log.i("CookBookLog", "Rating: " + rbRating.getRating());
-
         return view;
     }
 
     @Override
     public void showError(String errorMessage) {
         Toast.makeText(getContext(), errorMessage, Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void updateRecipe(Recipe recipe) {
+        RatingBar rbRating = (RatingBar) view.findViewById(R.id.recipedetails_rating);
+        rbRating.setRating(recipe.getRating());
     }
 }

@@ -9,7 +9,7 @@ public interface RecipeBase {
 
     String getTotalTime();
 
-    double getRating();
+    float getRating();
 
     String getIngredients();
 

@@ -40,7 +40,7 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.ViewHold
         Glide.with(context).load(recipe.getImgUrl()).into(holder.ivImage);
         holder.tvName.setText(recipe.getName());
         holder.tvCategory.setText(recipe.getCategory());
-        holder.tvRating.setText(Double.toString(recipe.getRating()));
+        holder.tvRating.setText(Float.toString(recipe.getRating()));
         holder.tvTotalTime.setText(recipe.getTotalTime());
         holder.tvId.setText(Long.toString(recipe.getId()));
         holder.tvImgUrl.setText(recipe.getImgUrl());

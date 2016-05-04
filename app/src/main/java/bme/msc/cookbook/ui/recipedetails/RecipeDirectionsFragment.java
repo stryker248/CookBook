@@ -13,6 +13,7 @@ import javax.inject.Inject;
 
 import bme.msc.cookbook.CookBookApplication;
 import bme.msc.cookbook.R;
+import bme.msc.cookbook.model.apiresult.Recipe;
 
 public class RecipeDirectionsFragment extends Fragment implements RecipeDetailsScreen {
     @Inject
@@ -50,5 +51,10 @@ public class RecipeDirectionsFragment extends Fragment implements RecipeDetailsS
     @Override
     public void showError(String errorMessage) {
         Toast.makeText(getContext(), errorMessage, Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void updateRecipe(Recipe recipe) {
+
     }
 }

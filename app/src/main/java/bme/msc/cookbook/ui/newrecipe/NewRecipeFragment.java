@@ -101,7 +101,7 @@ public class NewRecipeFragment extends Fragment implements NewRecipeScreen {
         intent.putExtra("name", recipe.getName());
         intent.putExtra("category", recipe.getCategory());
         intent.putExtra("imgurl", recipe.getImgUrl());
-        intent.putExtra("rating", Double.toString(recipe.getRating()));
+        intent.putExtra("rating", Float.toString(recipe.getRating()));
         intent.putExtra("totaltime", recipe.getTotalTime());
         intent.putExtra("ingredients", recipe.getIngredients());
         intent.putExtra("directions", recipe.getDirections());
