@@ -9,5 +9,5 @@ import dagger.Provides;
 public class ManagerModule {
     @Provides
     @Singleton
-    public RecipesManager provideRecipesManager() { return new RecipesManager(); }
+    public RecipesManager provideRecipesManager() { return new RecipesManagerImpl(); }
 }
