@@ -51,21 +51,12 @@ public class NewRecipePresenter extends Presenter<NewRecipeScreen> {
     }
 
     public void addNewRecipe(final NewRecipe newRecipe) {
-        if (newRecipe.getName().length() > 0 &&
-                newRecipe.getImgUrl().length() > 0 &&
-                newRecipe.getTotalTime().length() > 0 &&
-                newRecipe.getIngredients().length() > 0 &&
-                newRecipe.getDirections().length() > 0) {
-
-            networkExecutor.execute(new Runnable() {
-                @Override
-                public void run() {
-                    recipesInteractor.addNewRecipe(newRecipe);
-                }
-            });
-        } else {
-            screen.showError("Every field is required!");
-        }
+        networkExecutor.execute(new Runnable() {
+            @Override
+            public void run() {
+                recipesInteractor.addNewRecipe(newRecipe);
+            }
+        });
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)

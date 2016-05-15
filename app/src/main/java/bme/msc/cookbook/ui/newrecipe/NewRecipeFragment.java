@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -76,16 +77,18 @@ public class NewRecipeFragment extends Fragment implements NewRecipeScreen {
                 if (userEmail.length() == 0) {
                     showError("Email address not found! \nEnter your email in settings!");
                 } else {
-                    NewRecipe newRecipe = new NewRecipe();
-                    newRecipe.setName(etName.getText().toString());
-                    newRecipe.setImgUrl(etImgUrl.getText().toString());
-                    newRecipe.setTotalTime(etTotalTime.getText().toString());
-                    newRecipe.setIngredients(etIngredients.getText().toString());
-                    newRecipe.setDirections(etDirections.getText().toString());
-                    newRecipe.setCategoryId(((Category) spnnrCategory.getSelectedItem()).getId());
-                    newRecipe.setCreatedBy(userEmail);
+                    if (validateInput()) {
+                        NewRecipe newRecipe = new NewRecipe();
+                        newRecipe.setName(etName.getText().toString());
+                        newRecipe.setImgUrl(etImgUrl.getText().toString());
+                        newRecipe.setTotalTime(etTotalTime.getText().toString());
+                        newRecipe.setIngredients(etIngredients.getText().toString());
+                        newRecipe.setDirections(etDirections.getText().toString());
+                        newRecipe.setCategoryId(((Category) spnnrCategory.getSelectedItem()).getId());
+                        newRecipe.setCreatedBy(userEmail);
 
-                    newRecipePresenter.addNewRecipe(newRecipe);
+                        newRecipePresenter.addNewRecipe(newRecipe);
+                    }
                 }
             }
         });
@@ -93,6 +96,53 @@ public class NewRecipeFragment extends Fragment implements NewRecipeScreen {
         newRecipePresenter.refreshCategories();
 
         return view;
+    }
+
+    private boolean validateInput() {
+        etName.setError(null);
+        etImgUrl.setError(null);
+        etTotalTime.setError(null);
+        etIngredients.setError(null);
+        etDirections.setError(null);
+
+        boolean isValid = true;
+        View focusView = null;
+
+        if (TextUtils.isEmpty(etDirections.getText())) {
+            etDirections.setError("Directions is required!");
+            focusView = etDirections;
+            isValid = false;
+        }
+
+        if (TextUtils.isEmpty(etIngredients.getText())) {
+            etIngredients.setError("Ingredients is required!");
+            focusView = etIngredients;
+            isValid = false;
+        }
+
+        if (TextUtils.isEmpty(etTotalTime.getText())) {
+            etTotalTime.setError("TotalTime is required!");
+            focusView = etTotalTime;
+            isValid = false;
+        }
+
+        if (TextUtils.isEmpty(etImgUrl.getText())) {
+            etImgUrl.setError("ImgUrl is required!");
+            focusView = etImgUrl;
+            isValid = false;
+        }
+
+        if (TextUtils.isEmpty(etName.getText())) {
+            etName.setError("Name is required!");
+            focusView = etName;
+            isValid = false;
+        }
+
+        if (!isValid) {
+            focusView.requestFocus();
+        }
+
+        return isValid;
     }
 
     @Override
