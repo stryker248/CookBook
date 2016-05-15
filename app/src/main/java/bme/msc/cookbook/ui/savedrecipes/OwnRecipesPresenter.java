@@ -12,6 +12,7 @@ import bme.msc.cookbook.CookBookApplication;
 import bme.msc.cookbook.di.Network;
 import bme.msc.cookbook.interactor.recipes.RecipesInteractor;
 import bme.msc.cookbook.interactor.recipes.event.GetOwnRecipesEvent;
+import bme.msc.cookbook.interactor.recipes.event.GetRecipesForUserEvent;
 import bme.msc.cookbook.ui.Presenter;
 
 public class OwnRecipesPresenter extends Presenter<OwnRecipesScreen> {
@@ -35,11 +36,12 @@ public class OwnRecipesPresenter extends Presenter<OwnRecipesScreen> {
         super.detachScreen();
     }
 
-    public void refreshRecipes() {
+    public void refreshRecipes(final String userEmail) {
         networkExecutor.execute(new Runnable() {
             @Override
             public void run() {
                 recipesInteractor.getOwnRecipes();
+                recipesInteractor.getRecipesForUser(userEmail);
             }
         });
     }
@@ -55,6 +57,23 @@ public class OwnRecipesPresenter extends Presenter<OwnRecipesScreen> {
             if (screen != null) {
                 screen.showRecipes(event.getRecipes());
             }
+        }
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEventMainThread(final GetRecipesForUserEvent event) {
+        if (event.getThrowable() != null) {
+            event.getThrowable().printStackTrace();
+            /*if (screen != null) {
+                screen.showNetworkError(event.getThrowable().getMessage());
+            }*/
+        } else {
+            networkExecutor.execute(new Runnable() {
+                @Override
+                public void run() {
+                    recipesInteractor.updateOwnRecipes(event.getRecipes());
+                }
+            });
         }
     }
 }

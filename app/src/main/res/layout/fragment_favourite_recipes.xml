@@ -17,6 +17,6 @@
         android:layout_height="match_parent"
         android:layout_below="@id/savedrecipes_favourite_recyclerViewRecipes"
         android:gravity="center"
-        android:text="No data"/>
+        android:text="You do not have any favourite recipes."/>
 
 </LinearLayout>

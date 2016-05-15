@@ -1,20 +1,22 @@
 package bme.msc.cookbook.interactor.recipes.event;
 
+import bme.msc.cookbook.model.apiresult.Recipe;
+
 public class AddRecipeToFavouritesEvent {
-    String message;
+    Recipe recipe;
 
     public AddRecipeToFavouritesEvent() {
     }
 
-    public AddRecipeToFavouritesEvent(String message) {
-        this.message = message;
+    public AddRecipeToFavouritesEvent(Recipe recipe) {
+        this.recipe = recipe;
     }
 
-    public String getMessage() {
-        return message;
+    public Recipe getRecipe() {
+        return recipe;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public void setRecipe(Recipe recipe) {
+        this.recipe = recipe;
     }
 }

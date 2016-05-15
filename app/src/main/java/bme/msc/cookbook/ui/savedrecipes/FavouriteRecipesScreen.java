@@ -7,5 +7,7 @@ import bme.msc.cookbook.model.orm.FavouriteRecipe;
 public interface FavouriteRecipesScreen {
     void showRecipes(List<FavouriteRecipe> recipes);
 
-    void showNetworkError(String errorMessage);
+    void removeRecipe(Long id);
+
+    void showMessage(String message);
 }

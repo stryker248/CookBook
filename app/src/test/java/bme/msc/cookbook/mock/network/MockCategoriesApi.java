@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import bme.msc.cookbook.model.apiresult.CategoriesResult;
 import bme.msc.cookbook.model.apiresult.Category;
 import bme.msc.cookbook.network.CategoriesApi;
 import okhttp3.Request;
@@ -14,25 +13,23 @@ import retrofit2.Response;
 
 public class MockCategoriesApi implements CategoriesApi {
     @Override
-    public Call<CategoriesResult> getCategories() {
-        final CategoriesResult categoriesResult = new CategoriesResult();
-        List<Category> categories = new ArrayList<>();
+    public Call<List<Category>> getCategories() {
+        final List<Category> categories = new ArrayList<>();
 
         Category category = new Category();
         category.setId(1);
         category.setName("Category1");
 
         categories.add(category);
-        categoriesResult.setCategories(categories);
 
-        Call<CategoriesResult> call = new Call<CategoriesResult>() {
+        Call<List<Category>> call = new Call<List<Category>>() {
             @Override
-            public Response<CategoriesResult> execute() throws IOException {
-                return Response.success(categoriesResult);
+            public Response<List<Category>> execute() throws IOException {
+                return Response.success(categories);
             }
 
             @Override
-            public void enqueue(Callback<CategoriesResult> callback) {
+            public void enqueue(Callback<List<Category>> callback) {
             }
 
             @Override
@@ -50,7 +47,7 @@ public class MockCategoriesApi implements CategoriesApi {
             }
 
             @Override
-            public Call<CategoriesResult> clone() {
+            public Call<List<Category>> clone() {
                 return null;
             }
 

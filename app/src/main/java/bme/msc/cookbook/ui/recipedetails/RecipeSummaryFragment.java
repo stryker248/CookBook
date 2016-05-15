@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -23,6 +24,7 @@ import bme.msc.cookbook.model.apiresult.Recipe;
 
 public class RecipeSummaryFragment extends Fragment implements RecipeDetailsScreen {
     private View view;
+    private boolean isRated;
 
     @Inject
     RecipeSummaryPresenter recipeSummaryPresenter;
@@ -48,7 +50,7 @@ public class RecipeSummaryFragment extends Fragment implements RecipeDetailsScre
         view = inflater.inflate(R.layout.fragment_recipe_summary, container, false);
 
         Bundle intentExtras = getActivity().getIntent().getExtras();
-        String id = intentExtras.getString("id");
+        final String id = intentExtras.getString("id");
         String name = intentExtras.getString("name");
         String imgUrl = intentExtras.getString("imgurl");
         String category = intentExtras.getString("category");
@@ -59,18 +61,53 @@ public class RecipeSummaryFragment extends Fragment implements RecipeDetailsScre
         ImageView ivImage = (ImageView) view.findViewById(R.id.recipedetails_image);
         TextView tvCategory = (TextView) view.findViewById(R.id.recipedetails_category);
         TextView tvTotalTime = (TextView) view.findViewById(R.id.recipedetails_totalTime);
-        RatingBar rbRating = (RatingBar) view.findViewById(R.id.recipedetails_rating);
+        final RatingBar rbRating = (RatingBar) view.findViewById(R.id.recipedetails_rating);
+        rbRating.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_UP) {
+                    if (isRated) {
+                        rbRating.setRating(rbRating.getRating());
+                        Toast.makeText(getContext(), "You already rated this recipe!", Toast.LENGTH_LONG).show();
+                    } else {
+                        float touchPositionX = event.getX();
+                        float width = rbRating.getWidth();
+                        float starsf = (touchPositionX / width) * 5.0f;
+                        int stars = (int)starsf + 1;
+
+                        rbRating.setRating(stars);
+                        isRated = true;
+
+                        recipeSummaryPresenter.rateRecipe(Long.parseLong(id), stars);
+                    }
+
+                    v.setPressed(false);
+                }
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    v.setPressed(true);
+                }
+
+                if (event.getAction() == MotionEvent.ACTION_CANCEL) {
+                    v.setPressed(false);
+                }
+                return true;
+            }
+        });
 
         Glide.with(getContext()).load(imgUrl).into(ivImage);
         tvCategory.setText(category);
-        tvTotalTime.setText("Total time: " + totalTime);
+        tvTotalTime.setText(totalTime);
         rbRating.setRating(Float.parseFloat(rating));
+
+        recipeSummaryPresenter.updateFavouriteRecipeVisitDate(Long.parseLong(id));
 
         return view;
     }
 
     @Override
-    public void showError(String errorMessage) {
+    public void showMessage(String errorMessage) {
+        RatingBar rbRating = (RatingBar) view.findViewById(R.id.recipedetails_rating);
+        isRated = false;
         Toast.makeText(getContext(), errorMessage, Toast.LENGTH_LONG).show();
     }
 

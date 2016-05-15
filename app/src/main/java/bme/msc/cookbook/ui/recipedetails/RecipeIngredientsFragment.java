@@ -41,6 +41,7 @@ public class RecipeIngredientsFragment extends Fragment implements RecipeDetails
 
         Bundle intentExtras = getActivity().getIntent().getExtras();
         String ingredients = intentExtras.getString("ingredients");
+        ingredients = ingredients.replace("|", "\n\n");
 
         TextView tvIngredients = (TextView) view.findViewById(R.id.recipedetails_ingredients);
         tvIngredients.setText(ingredients);
@@ -49,7 +50,7 @@ public class RecipeIngredientsFragment extends Fragment implements RecipeDetails
     }
 
     @Override
-    public void showError(String errorMessage) {
+    public void showMessage(String errorMessage) {
         Toast.makeText(getContext(), errorMessage, Toast.LENGTH_LONG).show();
     }
 

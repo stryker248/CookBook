@@ -12,6 +12,8 @@ import bme.msc.cookbook.CookBookApplication;
 import bme.msc.cookbook.di.Network;
 import bme.msc.cookbook.interactor.recipes.RecipesInteractor;
 import bme.msc.cookbook.interactor.recipes.event.GetFavouriteRecipesEvent;
+import bme.msc.cookbook.interactor.recipes.event.RecipeRemovedFromFavouritesEvent;
+import bme.msc.cookbook.interactor.recipes.event.RemoveRecipeFromFavouritesEvent;
 import bme.msc.cookbook.ui.Presenter;
 
 public class FavouriteRecipesPresenter extends Presenter<FavouriteRecipesScreen> {
@@ -58,12 +60,28 @@ public class FavouriteRecipesPresenter extends Presenter<FavouriteRecipesScreen>
         if (event.getThrowable() != null) {
             event.getThrowable().printStackTrace();
             if (screen != null) {
-                screen.showNetworkError(event.getThrowable().getMessage());
+                screen.showMessage(event.getThrowable().getMessage());
             }
         } else {
             if (screen != null) {
                 screen.showRecipes(event.getRecipes());
             }
         }
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEventMainThread(final RemoveRecipeFromFavouritesEvent event) {
+        networkExecutor.execute(new Runnable() {
+            @Override
+            public void run() {
+                recipesInteractor.removeRecipeFromFavourites(event.getId());
+            }
+        });
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEventMainThread(final RecipeRemovedFromFavouritesEvent event) {
+        screen.removeRecipe(event.getId());
+        screen.showMessage(event.getMessage());
     }
 }

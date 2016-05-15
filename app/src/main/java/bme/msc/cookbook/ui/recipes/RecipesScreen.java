@@ -8,4 +8,6 @@ public interface RecipesScreen {
     void showRecipes(List<Recipe> recipes);
 
     void showNetworkError(String errorMessage);
+
+    void showMessage(String message);
 }

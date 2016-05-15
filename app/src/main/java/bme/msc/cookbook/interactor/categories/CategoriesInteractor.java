@@ -9,7 +9,6 @@ import javax.inject.Inject;
 
 import bme.msc.cookbook.CookBookApplication;
 import bme.msc.cookbook.interactor.categories.event.GetCategoriesEvent;
-import bme.msc.cookbook.model.apiresult.CategoriesResult;
 import bme.msc.cookbook.model.apiresult.Category;
 import bme.msc.cookbook.network.CategoriesApi;
 import retrofit2.Call;
@@ -22,15 +21,15 @@ public class CategoriesInteractor {
     public CategoriesInteractor() { CookBookApplication.injector.inject(this); }
 
     public void getCategories() {
-        Call<CategoriesResult> categoriesQueryCall = categoriesApi.getCategories();
+        Call<List<Category>> categoriesQueryCall = categoriesApi.getCategories();
         GetCategoriesEvent event = new GetCategoriesEvent();
         try {
-            Response<CategoriesResult> response = categoriesQueryCall.execute();
+            Response<List<Category>> response = categoriesQueryCall.execute();
             if (response.code() != 200) {
                 throw new Exception("Something went wrong!");
             }
             event.setCode(response.code());
-            event.setCategories(response.body().getCategories());
+            event.setCategories(response.body());
             EventBus.getDefault().post(event);
         } catch (Exception e) {
             event.setThrowable(e);

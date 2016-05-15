@@ -1,20 +1,20 @@
 package bme.msc.cookbook.interactor.recipes.event;
 
 public class RemoveRecipeFromFavouritesEvent {
-    String message;
+    Long id;
 
     public RemoveRecipeFromFavouritesEvent() {
     }
 
-    public RemoveRecipeFromFavouritesEvent(String message) {
-        this.message = message;
+    public RemoveRecipeFromFavouritesEvent(Long id) {
+        this.id = id;
     }
 
-    public String getMessage() {
-        return message;
+    public Long getId() {
+        return id;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public void setId(Long id) {
+        this.id = id;
     }
 }

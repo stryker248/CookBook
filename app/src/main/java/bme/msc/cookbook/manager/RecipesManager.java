@@ -14,4 +14,12 @@ public interface RecipesManager {
     boolean addRecipeToFavourites(Recipe recipe);
 
     void removeRecipeFromFavourites(Long id);
+
+    void addOwnRecipe(Recipe recipe);
+
+    void updateFavouriteRecipeVisitDate(Long id);
+
+    void updateFavouriteRecipes(List<Recipe> recipes);
+
+    void updateOwnRecipes(List<Recipe> recipes);
 }

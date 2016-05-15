@@ -108,4 +108,9 @@ public class RecipesFragment extends Fragment implements RecipesScreen {
 
         Toast.makeText(getContext(), errorMessage, Toast.LENGTH_LONG).show();
     }
+
+    @Override
+    public void showMessage(String message) {
+        Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
+    }
 }

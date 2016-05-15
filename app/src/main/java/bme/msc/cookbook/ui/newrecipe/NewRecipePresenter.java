@@ -10,6 +10,8 @@ import javax.inject.Inject;
 
 import bme.msc.cookbook.CookBookApplication;
 import bme.msc.cookbook.di.Network;
+import bme.msc.cookbook.interactor.categories.CategoriesInteractor;
+import bme.msc.cookbook.interactor.categories.event.GetCategoriesEvent;
 import bme.msc.cookbook.interactor.recipes.RecipesInteractor;
 import bme.msc.cookbook.interactor.recipes.event.AddRecipeEvent;
 import bme.msc.cookbook.model.apimodel.NewRecipe;
@@ -22,6 +24,9 @@ public class NewRecipePresenter extends Presenter<NewRecipeScreen> {
 
     @Inject
     RecipesInteractor recipesInteractor;
+
+    @Inject
+    CategoriesInteractor categoriesInteractor;
 
     @Override
     public void attachScreen(NewRecipeScreen screen) {
@@ -36,13 +41,31 @@ public class NewRecipePresenter extends Presenter<NewRecipeScreen> {
         super.detachScreen();
     }
 
-    public void addNewRecipe(final NewRecipe newRecipe) {
+    public void refreshCategories() {
         networkExecutor.execute(new Runnable() {
             @Override
             public void run() {
-                recipesInteractor.addNewRecipe(newRecipe);
+                categoriesInteractor.getCategories();
             }
         });
+    }
+
+    public void addNewRecipe(final NewRecipe newRecipe) {
+        if (newRecipe.getName().length() > 0 &&
+                newRecipe.getImgUrl().length() > 0 &&
+                newRecipe.getTotalTime().length() > 0 &&
+                newRecipe.getIngredients().length() > 0 &&
+                newRecipe.getDirections().length() > 0) {
+
+            networkExecutor.execute(new Runnable() {
+                @Override
+                public void run() {
+                    recipesInteractor.addNewRecipe(newRecipe);
+                }
+            });
+        } else {
+            screen.showError("Every field is required!");
+        }
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
@@ -55,6 +78,20 @@ public class NewRecipePresenter extends Presenter<NewRecipeScreen> {
         } else {
             if (screen != null) {
                 screen.showNewRecipe(event.getRecipe());
+            }
+        }
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEventMainThread(final GetCategoriesEvent event) {
+        if (event.getThrowable() != null) {
+            event.getThrowable().printStackTrace();
+            if (screen != null) {
+                screen.showError(event.getThrowable().getMessage());
+            }
+        } else {
+            if (screen != null) {
+                screen.addCategories(event.getCategories());
             }
         }
     }

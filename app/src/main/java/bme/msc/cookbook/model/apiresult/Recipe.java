@@ -3,9 +3,7 @@ package bme.msc.cookbook.model.apiresult;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import bme.msc.cookbook.model.RecipeBase;
-
-public class Recipe implements RecipeBase {
+public class Recipe {
     @SerializedName("id")
     @Expose
     private Long id;
@@ -14,11 +12,11 @@ public class Recipe implements RecipeBase {
     @Expose
     private String name;
 
-    @SerializedName("img_url")
+    @SerializedName("imgUrl")
     @Expose
     private String imgUrl;
 
-    @SerializedName("total_time")
+    @SerializedName("totalTime")
     @Expose
     private String totalTime;
 

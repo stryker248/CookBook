@@ -8,11 +8,11 @@ public class NewRecipe {
     @Expose
     private String name;
 
-    @SerializedName("img_url")
+    @SerializedName("imgUrl")
     @Expose
     private String imgUrl;
 
-    @SerializedName("total_time")
+    @SerializedName("totalTime")
     @Expose
     private String totalTime;
 
@@ -24,13 +24,27 @@ public class NewRecipe {
     @Expose
     private String directions;
 
-    @SerializedName("created_by")
+    @SerializedName("createdBy")
     @Expose
     private String createdBy;
 
-    @SerializedName("category_id")
+    @SerializedName("categoryId")
     @Expose
     private int categoryId;
+
+    public NewRecipe() {
+    }
+
+    public NewRecipe(String name, String imgUrl, String totalTime, String ingredients,
+                     String directions, String createdBy, int categoryId) {
+        this.name = name;
+        this.imgUrl = imgUrl;
+        this.totalTime = totalTime;
+        this.ingredients = ingredients;
+        this.directions = directions;
+        this.createdBy = createdBy;
+        this.categoryId = categoryId;
+    }
 
     public String getName() {
         return name;

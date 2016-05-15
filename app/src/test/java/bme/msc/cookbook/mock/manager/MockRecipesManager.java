@@ -18,6 +18,7 @@ public class MockRecipesManager implements RecipesManager {
         ownRecipes = new ArrayList<>();
 
         FavouriteRecipe favouriteRecipe = new FavouriteRecipe(
+                1L,
                 "Name",
                 "ImgUrl",
                 "60 min",
@@ -29,6 +30,7 @@ public class MockRecipesManager implements RecipesManager {
         );
 
         OwnRecipe ownRecipe = new OwnRecipe(
+                1L,
                 "Name",
                 "ImgUrl",
                 "60 min",
@@ -61,6 +63,7 @@ public class MockRecipesManager implements RecipesManager {
         }
 
         FavouriteRecipe newRecipe = new FavouriteRecipe(
+                recipe.getId(),
                 recipe.getName(),
                 recipe.getImgUrl(),
                 recipe.getTotalTime(),
@@ -86,5 +89,25 @@ public class MockRecipesManager implements RecipesManager {
         if (recipe != null) {
             favouriteRecipes.remove(recipe);
         }
+    }
+
+    @Override
+    public void addOwnRecipe(Recipe recipe) {
+
+    }
+
+    @Override
+    public void updateFavouriteRecipeVisitDate(Long id) {
+
+    }
+
+    @Override
+    public void updateFavouriteRecipes(List<Recipe> recipes) {
+
+    }
+
+    @Override
+    public void updateOwnRecipes(List<Recipe> recipes) {
+
     }
 }

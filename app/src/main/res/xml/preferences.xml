@@ -1,12 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-    <PreferenceCategory
-        android:title="User settings"
-        android:key="pref_key_storage_settings">
-        <EditTextPreference
-            android:key="pref_key_user_email"
-            android:summary="Email address for new recipes"
-            android:title="Email address"
-            android:defaultValue=""/>
-    </PreferenceCategory>
-</PreferenceScreen>
+<android.support.v7.preference.PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+<android.support.v7.preference.PreferenceCategory
+    android:title="@string/settings_user_category">
+
+    <EditTextPreference
+        android:key="pref_key_user_email"
+        android:summary="@string/settings_user_email_summary"
+        android:title="@string/settings_user_email_title"
+        android:defaultValue="" />
+
+</android.support.v7.preference.PreferenceCategory>
+
+</android.support.v7.preference.PreferenceScreen>

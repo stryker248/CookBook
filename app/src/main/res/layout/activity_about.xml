@@ -39,7 +39,7 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="250dp"
-            android:src="@drawable/application_logo"/>
+            android:src="@drawable/about_logo"/>
 
         <TextView
             android:layout_width="match_parent"
@@ -47,7 +47,7 @@
             android:gravity="center"
             android:textSize="36sp"
             android:layout_marginTop="20dp"
-            android:text="CookBook"/>
+            android:text="@string/about_app_name"/>
 
         <TextView
             android:layout_width="match_parent"
@@ -55,7 +55,7 @@
             android:gravity="center"
             android:textSize="20sp"
             android:layout_marginTop="20dp"
-            android:text="Version 0.1"/>
+            android:text="@string/about_app_version"/>
 
         <TextView
             android:layout_width="match_parent"
@@ -63,7 +63,7 @@
             android:gravity="center"
             android:textSize="20sp"
             android:layout_marginTop="20dp"
-            android:text="2016.04.18."/>
+            android:text="@string/about_app_date"/>
 
     </LinearLayout>
 

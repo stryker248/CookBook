@@ -2,6 +2,7 @@ package bme.msc.cookbook.ui.recipedetails;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,16 +41,17 @@ public class RecipeDirectionsFragment extends Fragment implements RecipeDetailsS
         View view = inflater.inflate(R.layout.fragment_recipe_directions, container, false);
 
         Bundle intentExtras = getActivity().getIntent().getExtras();
-        String ingredients = intentExtras.getString("directions");
+        String directions = intentExtras.getString("directions");
+        directions = directions.replace("|", "\n\n");
 
         TextView tvDirections = (TextView) view.findViewById(R.id.recipedetails_directions);
-        tvDirections.setText(ingredients);
+        tvDirections.setText(directions);
 
         return view;
     }
 
     @Override
-    public void showError(String errorMessage) {
+    public void showMessage(String errorMessage) {
         Toast.makeText(getContext(), errorMessage, Toast.LENGTH_LONG).show();
     }
 

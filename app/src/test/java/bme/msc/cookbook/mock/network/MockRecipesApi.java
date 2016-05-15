@@ -1,9 +1,10 @@
 package bme.msc.cookbook.mock.network;
 
+import java.util.List;
+
 import bme.msc.cookbook.model.apimodel.NewRating;
 import bme.msc.cookbook.model.apimodel.NewRecipe;
 import bme.msc.cookbook.model.apiresult.Recipe;
-import bme.msc.cookbook.model.apiresult.RecipesResult;
 import bme.msc.cookbook.network.RecipesApi;
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -11,17 +12,17 @@ import retrofit2.http.Path;
 
 public class MockRecipesApi implements RecipesApi {
     @Override
-    public Call<RecipesResult> getRecipes() {
+    public Call<List<Recipe>> getRecipes() {
         return null;
     }
 
     @Override
-    public Call<RecipesResult> getRecipesForUser(@Path("userEmail") String userEmail) {
+    public Call<List<Recipe>> getRecipesForUser(@Path("userEmail") String userEmail) {
         return null;
     }
 
     @Override
-    public Call<RecipesResult> searchRecipes(@Path("searchText") String searchText) {
+    public Call<List<Recipe>> searchRecipes(@Path("searchText") String searchText) {
         return null;
     }
 

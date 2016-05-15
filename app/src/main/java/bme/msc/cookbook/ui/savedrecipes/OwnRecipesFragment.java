@@ -1,7 +1,9 @@
 package bme.msc.cookbook.ui.savedrecipes;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -18,15 +20,14 @@ import javax.inject.Inject;
 
 import bme.msc.cookbook.CookBookApplication;
 import bme.msc.cookbook.R;
-import bme.msc.cookbook.adapter.RecipesAdapter;
-import bme.msc.cookbook.model.apiresult.Recipe;
+import bme.msc.cookbook.adapter.OwnRecipesAdapter;
 import bme.msc.cookbook.model.orm.OwnRecipe;
 
 public class OwnRecipesFragment extends Fragment implements OwnRecipesScreen {
     private RecyclerView recyclerViewRecipes;
     private TextView tvEmpty;
     private List<OwnRecipe> recipesList;
-    private RecipesAdapter recipesAdapter;
+    private OwnRecipesAdapter recipesAdapter;
 
     @Inject
     OwnRecipesPresenter ownRecipesPresenter;
@@ -59,7 +60,7 @@ public class OwnRecipesFragment extends Fragment implements OwnRecipesScreen {
         recyclerViewRecipes.setLayoutManager(llm);
 
         recipesList = new ArrayList<>();
-        recipesAdapter = new RecipesAdapter(getContext(), recipesList);
+        recipesAdapter = new OwnRecipesAdapter(getContext(), recipesList);
         recyclerViewRecipes.setAdapter(recipesAdapter);
 
         return view;
@@ -68,7 +69,18 @@ public class OwnRecipesFragment extends Fragment implements OwnRecipesScreen {
     @Override
     public void onResume() {
         super.onResume();
-        ownRecipesPresenter.refreshRecipes();
+        SharedPreferences sharedPreferences =
+                PreferenceManager.getDefaultSharedPreferences(getActivity());
+        String userEmail = sharedPreferences.getString("pref_key_user_email", "");
+
+        if (userEmail.length() > 0) {
+            ownRecipesPresenter.refreshRecipes(userEmail);
+        } else {
+            Toast.makeText(
+                    getContext(),
+                    "Please enter your email address in settings to get your recipes!",
+                    Toast.LENGTH_LONG).show();
+        }
     }
 
     @Override

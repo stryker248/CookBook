@@ -5,9 +5,9 @@
     <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
-        android:name="com.orm.SugarApp"
+        android:name=".CookBookApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/application_logo"
         android:label="@string/application_name"
         android:supportsRtl="true"
         android:theme="@style/CookBookTheme">
@@ -18,12 +18,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.about.AboutActivity" android:label="About" />
-        <activity android:name=".ui.newrecipe.NewRecipeActivity" android:label="New recipe" />
-        <activity android:name=".ui.recipedetails.RecipeDetailsActivity" android:label="Details" />
-        <activity android:name=".ui.recipes.RecipesActivity" android:label="Recipes" />
-        <activity android:name=".ui.savedrecipes.SavedRecipesActivity" android:label="Saved recipes" />
-        <activity android:name=".ui.settings.SettingsActivity" android:label="Settings" />
+        <activity android:name=".ui.recipes.RecipesActivity" android:label="@string/title_activity_recipes" />
+        <activity android:name=".ui.newrecipe.NewRecipeActivity" android:label="@string/title_activity_new_recipe" />
+        <activity android:name=".ui.recipedetails.RecipeDetailsActivity" />
+        <activity android:name=".ui.savedrecipes.SavedRecipesActivity" android:label="@string/title_activity_saved_recipes" />
+        <activity android:name=".ui.settings.SettingsActivity" android:label="@string/title_activity_settings" />
+        <activity android:name=".ui.about.AboutActivity" android:label="@string/title_activity_about" />
 
         <meta-data android:name="DATABASE" android:value="cookbookdb.db" />
         <meta-data android:name="VERSION" android:value="1" />

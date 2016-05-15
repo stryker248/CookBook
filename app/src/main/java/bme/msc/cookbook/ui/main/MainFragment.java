@@ -18,15 +18,14 @@ import javax.inject.Inject;
 
 import bme.msc.cookbook.CookBookApplication;
 import bme.msc.cookbook.R;
-import bme.msc.cookbook.adapter.RecipesAdapter;
-import bme.msc.cookbook.model.apiresult.Recipe;
+import bme.msc.cookbook.adapter.FavouriteRecipesAdapter;
 import bme.msc.cookbook.model.orm.FavouriteRecipe;
 
 public class MainFragment extends Fragment implements MainScreen {
     private RecyclerView recyclerViewRecipes;
     private TextView tvEmpty;
     private List<FavouriteRecipe> recipesList;
-    private RecipesAdapter recipesAdapter;
+    private FavouriteRecipesAdapter recipesAdapter;
 
     @Inject
     MainPresenter mainPresenter;
@@ -60,7 +59,7 @@ public class MainFragment extends Fragment implements MainScreen {
         recyclerViewRecipes.setLayoutManager(llm);
 
         recipesList = new ArrayList<>();
-        recipesAdapter = new RecipesAdapter(getContext(), recipesList);
+        recipesAdapter = new FavouriteRecipesAdapter(getContext(), recipesList);
         recyclerViewRecipes.setAdapter(recipesAdapter);
 
         return view;
@@ -81,14 +80,34 @@ public class MainFragment extends Fragment implements MainScreen {
         if(recipesList.isEmpty()) {
             recyclerViewRecipes.setVisibility(View.GONE);
             tvEmpty.setVisibility(View.VISIBLE);
-        } else {
+        }  else {
             recyclerViewRecipes.setVisibility(View.VISIBLE);
             tvEmpty.setVisibility(View.GONE);
         }
     }
 
     @Override
-    public void showNetworkError(String errorMessage) {
-        Toast.makeText(getContext(), errorMessage, Toast.LENGTH_LONG).show();
+    public void removeRecipe(Long id) {
+        FavouriteRecipe recipe = null;
+        for(FavouriteRecipe r : recipesList) {
+            if (r.getId().equals(id)) {
+                recipe = r;
+            }
+        }
+
+        if (recipe != null) {
+            recipesList.remove(recipe);
+            recipesAdapter.notifyDataSetChanged();
+
+            if(recipesList.isEmpty()) {
+                recyclerViewRecipes.setVisibility(View.GONE);
+                tvEmpty.setVisibility(View.VISIBLE);
+            }
+        }
+    }
+
+    @Override
+    public void showMessage(String message) {
+        Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
     }
 }

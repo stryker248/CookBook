@@ -1,45 +1,23 @@
 package bme.msc.cookbook.model.orm;
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
 import com.orm.SugarRecord;
 
-import bme.msc.cookbook.model.RecipeBase;
-
-public class OwnRecipe extends SugarRecord implements RecipeBase {
-    @SerializedName("name")
-    @Expose
+public class OwnRecipe extends SugarRecord {
+    private Long recipeId;
     private String name;
-
-    @SerializedName("img_url")
-    @Expose
     private String imgUrl;
-
-    @SerializedName("total_time")
-    @Expose
     private String totalTime;
-
-    @SerializedName("rating")
-    @Expose
     private float rating;
-
-    @SerializedName("ingredients")
-    @Expose
     private String ingredients;
-
-    @SerializedName("directions")
-    @Expose
     private String directions;
-
-    @SerializedName("category")
-    @Expose
     private String category;
 
     public OwnRecipe() {
     }
 
-    public OwnRecipe(String name, String imgUrl, String totalTime, float rating,
+    public OwnRecipe(Long recipeId, String name, String imgUrl, String totalTime, float rating,
                            String ingredients, String directions, String category) {
+        this.recipeId = recipeId;
         this.name = name;
         this.imgUrl = imgUrl;
         this.totalTime = totalTime;
@@ -48,6 +26,10 @@ public class OwnRecipe extends SugarRecord implements RecipeBase {
         this.directions = directions;
         this.category = category;
     }
+
+    public Long getRecipeId() { return recipeId; }
+
+    public void setRecipeId(Long recipeId) { this.recipeId = recipeId; }
 
     public String getName() {
         return name;

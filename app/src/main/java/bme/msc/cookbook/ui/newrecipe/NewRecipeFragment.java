@@ -1,8 +1,11 @@
 package bme.msc.cookbook.ui.newrecipe;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +16,6 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -23,7 +25,6 @@ import bme.msc.cookbook.R;
 import bme.msc.cookbook.model.apiresult.Category;
 import bme.msc.cookbook.model.apimodel.NewRecipe;
 import bme.msc.cookbook.model.apiresult.Recipe;
-import bme.msc.cookbook.ui.recipedetails.RecipeDetailsActivity;
 
 public class NewRecipeFragment extends Fragment implements NewRecipeScreen {
     private EditText etName;
@@ -64,48 +65,56 @@ public class NewRecipeFragment extends Fragment implements NewRecipeScreen {
         etIngredients = (EditText) view.findViewById(R.id.newrecipe_etIngredients);
         etDirections = (EditText) view.findViewById(R.id.newrecipe_etDirections);
 
-        //TODO: kategóriák lekérése
-        List<Category> categories = new ArrayList<>();
-        categories.add(new Category(1, "Test category 1"));
-        categories.add(new Category(2, "Test category 2"));
-        categories.add(new Category(3, "Test category 3"));
-        categories.add(new Category(4, "Test category 4"));
-        ArrayAdapter<Category> dataAdapter = new ArrayAdapter<>(
-                getContext(), R.layout.support_simple_spinner_dropdown_item, categories);
-        spnnrCategory.setAdapter(dataAdapter);
-
         Button btnSave = (Button) view.findViewById(R.id.newrecipe_btnSave);
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NewRecipe newRecipe = new NewRecipe();
-                newRecipe.setName(etName.getText().toString());
-                newRecipe.setImgUrl(etImgUrl.getText().toString());
-                newRecipe.setTotalTime(etTotalTime.getText().toString());
-                newRecipe.setIngredients(etIngredients.getText().toString());
-                newRecipe.setDirections(etDirections.getText().toString());
-                newRecipe.setCreatedBy("testuser"); //TODO: módosítani beállításokra
-                newRecipe.setCategoryId(((Category) spnnrCategory.getSelectedItem()).getId());
+                SharedPreferences sharedPreferences =
+                        PreferenceManager.getDefaultSharedPreferences(getActivity());
 
-                newRecipePresenter.addNewRecipe(newRecipe);
+                String userEmail = sharedPreferences.getString("pref_key_user_email", "");
+                if (userEmail.length() == 0) {
+                    showError("Email address not found! \nEnter your email in settings!");
+                } else {
+                    NewRecipe newRecipe = new NewRecipe();
+                    newRecipe.setName(etName.getText().toString());
+                    newRecipe.setImgUrl(etImgUrl.getText().toString());
+                    newRecipe.setTotalTime(etTotalTime.getText().toString());
+                    newRecipe.setIngredients(etIngredients.getText().toString());
+                    newRecipe.setDirections(etDirections.getText().toString());
+                    newRecipe.setCategoryId(((Category) spnnrCategory.getSelectedItem()).getId());
+                    newRecipe.setCreatedBy(userEmail);
+
+                    newRecipePresenter.addNewRecipe(newRecipe);
+                }
             }
         });
+
+        newRecipePresenter.refreshCategories();
 
         return view;
     }
 
     @Override
+    public void addCategories(List<Category> categories) {
+        ArrayAdapter<Category> dataAdapter = new ArrayAdapter<>(
+                getContext(), R.layout.support_simple_spinner_dropdown_item, categories);
+        spnnrCategory.setAdapter(dataAdapter);
+    }
+
+    @Override
     public void showNewRecipe(Recipe recipe) {
-        Intent intent = new Intent(getContext(), RecipeDetailsActivity.class);
-        intent.putExtra("id", recipe.getId());
-        intent.putExtra("name", recipe.getName());
-        intent.putExtra("category", recipe.getCategory());
-        intent.putExtra("imgurl", recipe.getImgUrl());
-        intent.putExtra("rating", Float.toString(recipe.getRating()));
-        intent.putExtra("totaltime", recipe.getTotalTime());
-        intent.putExtra("ingredients", recipe.getIngredients());
-        intent.putExtra("directions", recipe.getDirections());
-        getContext().startActivity(intent);
+        Intent returnIntent = new Intent();
+        returnIntent.putExtra("id", Long.toString(recipe.getId()));
+        returnIntent.putExtra("name", recipe.getName());
+        returnIntent.putExtra("category", recipe.getCategory());
+        returnIntent.putExtra("imgurl", recipe.getImgUrl());
+        returnIntent.putExtra("rating", Float.toString(recipe.getRating()));
+        returnIntent.putExtra("totaltime", recipe.getTotalTime());
+        returnIntent.putExtra("ingredients", recipe.getIngredients());
+        returnIntent.putExtra("directions", recipe.getDirections());
+        getActivity().setResult(Activity.RESULT_OK, returnIntent);
+        getActivity().finish();
     }
 
     @Override
