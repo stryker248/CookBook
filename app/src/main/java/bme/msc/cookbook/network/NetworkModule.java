@@ -18,4 +18,16 @@ public class NetworkModule {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
     }
+
+    @Provides
+    @Singleton
+    public RecipesApi provideRecipesApi(Retrofit retrofit) {
+        return retrofit.create(RecipesApi.class);
+    }
+
+    @Provides
+    @Singleton
+    public CategoriesApi provideCategoriesApi(Retrofit retrofit) {
+        return retrofit.create(CategoriesApi.class);
+    }
 }

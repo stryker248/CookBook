@@ -2,10 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="bme.msc.cookbook">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:name=".CookBookApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/application_logo"
         android:label="@string/application_name"
         android:supportsRtl="true"
         android:theme="@style/CookBookTheme">
@@ -16,7 +18,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.about.AboutActivity"></activity>
+        <activity android:name=".ui.recipes.RecipesActivity" android:label="@string/title_activity_recipes" />
+        <activity android:name=".ui.newrecipe.NewRecipeActivity" android:label="@string/title_activity_new_recipe" />
+        <activity android:name=".ui.recipedetails.RecipeDetailsActivity" />
+        <activity android:name=".ui.savedrecipes.SavedRecipesActivity" android:label="@string/title_activity_saved_recipes" />
+        <activity android:name=".ui.settings.SettingsActivity" android:label="@string/title_activity_settings" />
+        <activity android:name=".ui.about.AboutActivity" android:label="@string/title_activity_about" />
+
+        <meta-data android:name="DATABASE" android:value="cookbookdb.db" />
+        <meta-data android:name="VERSION" android:value="1" />
+        <meta-data android:name="QUERY_LOG" android:value="true" />
+        <meta-data android:name="DOMAIN_PACKAGE_NAME" android:value="bme.msc.cookbook.model.orm" />
     </application>
 
 </manifest>

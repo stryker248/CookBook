@@ -2,5 +2,20 @@
 
     <!-- General -->
     <string name="application_name">CookBook</string>
+    <string name="title_activity_new_recipe">New recipe</string>
+    <string name="title_activity_recipes">Recipes</string>
+    <string name="title_activity_saved_recipes">Saved recipes</string>
+    <string name="title_activity_settings">Settings</string>
+    <string name="title_activity_about">About</string>
+
+    <!-- Strings related to Settings -->
+    <string name="settings_user_category">User settings</string>
+    <string name="settings_user_email_title">Email address</string>
+    <string name="settings_user_email_summary">Email address for new recipes</string>
+
+    <!-- Strings related to About -->
+    <string name="about_app_name">CookBook</string>
+    <string name="about_app_version">Version 0.8</string>
+    <string name="about_app_date">2016.05.08.</string>
 
 </resources>

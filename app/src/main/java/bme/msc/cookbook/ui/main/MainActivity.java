@@ -1,6 +1,10 @@
 package bme.msc.cookbook.ui.main;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -20,6 +24,11 @@ import com.mikepenz.materialdrawer.model.interfaces.Nameable;
 
 import bme.msc.cookbook.R;
 import bme.msc.cookbook.ui.about.AboutActivity;
+import bme.msc.cookbook.ui.newrecipe.NewRecipeActivity;
+import bme.msc.cookbook.ui.recipedetails.RecipeDetailsActivity;
+import bme.msc.cookbook.ui.recipes.RecipesActivity;
+import bme.msc.cookbook.ui.savedrecipes.SavedRecipesActivity;
+import bme.msc.cookbook.ui.settings.SettingsActivity;
 
 public class MainActivity extends AppCompatActivity {
     private Drawer navigationDrawer;
@@ -32,17 +41,45 @@ public class MainActivity extends AppCompatActivity {
         createNavigationDrawer();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if (navigationDrawer != null) {
+            navigationDrawer.setSelection(-1, false);
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        if (navigationDrawer != null) {
+            navigationDrawer.closeDrawer();
+            navigationDrawer.setSelection(-1, false);
+        }
+    }
+
     private void createNavigationDrawer() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.main_toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        SharedPreferences sharedPreferences =
+                PreferenceManager.getDefaultSharedPreferences(this);
+        String userEmail = sharedPreferences.getString("pref_key_user_email", "");
+
+        ProfileDrawerItem profileDrawerItem = null;
+        if (userEmail.length() > 0) {
+            profileDrawerItem = new ProfileDrawerItem().withName("").withEmail(userEmail).withIcon(R.drawable.drawer_header_profile);
+        } else {
+            profileDrawerItem = new ProfileDrawerItem().withName("").withEmail("").withIcon(R.drawable.drawer_header_profile);
+        }
+
         AccountHeader headerResult = new AccountHeaderBuilder()
                 .withActivity(this)
                 .withHeaderBackground(R.drawable.drawer_header_background)
-                .addProfiles(
-                        new ProfileDrawerItem().withName("").withEmail("").withIcon(R.drawable.drawer_header_profile)
-                )
+                .addProfiles(profileDrawerItem)
                 .build();
 
         navigationDrawer = new DrawerBuilder()
@@ -63,28 +100,44 @@ public class MainActivity extends AppCompatActivity {
                         int id = (int)drawerItem.getIdentifier();
                         switch (id) {
                             case 1:
-                                Toast.makeText(getApplicationContext(), ((Nameable) drawerItem).getName().getText(), Toast.LENGTH_SHORT).show();
+                                startActivity(new Intent(MainActivity.this, RecipesActivity.class));
                                 break;
                             case 2:
-                                Toast.makeText(getApplicationContext(), ((Nameable) drawerItem).getName().getText(), Toast.LENGTH_SHORT).show();
+                                startActivityForResult(new Intent(MainActivity.this, NewRecipeActivity.class), 1);
                                 break;
                             case 3:
-                                Toast.makeText(getApplicationContext(), ((Nameable) drawerItem).getName().getText(), Toast.LENGTH_SHORT).show();
+                                startActivity(new Intent(MainActivity.this, SavedRecipesActivity.class));
                                 break;
                             case 4:
-                                Toast.makeText(getApplicationContext(), ((Nameable) drawerItem).getName().getText(), Toast.LENGTH_SHORT).show();
+                                startActivity(new Intent(MainActivity.this, SettingsActivity.class));
                                 break;
                             case 5:
                                 startActivity(new Intent(MainActivity.this, AboutActivity.class));
                                 break;
                         }
 
-                        navigationDrawer.closeDrawer();
-                        navigationDrawer.setSelection(-1, false);
+                        overridePendingTransition(R.anim.fadein, R.anim.fadeout);
                         return true;
                     }
                 })
-                .withSelectedItem(-1)
                 .build();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == 1) {
+            if(resultCode == Activity.RESULT_OK){
+                Intent intent = new Intent(this, RecipeDetailsActivity.class);
+                intent.putExtra("id", data.getStringExtra("id"));
+                intent.putExtra("name", data.getStringExtra("name"));
+                intent.putExtra("category", data.getStringExtra("category"));
+                intent.putExtra("imgurl", data.getStringExtra("imgurl"));
+                intent.putExtra("rating", data.getStringExtra("rating"));
+                intent.putExtra("totaltime", data.getStringExtra("totaltime"));
+                intent.putExtra("ingredients", data.getStringExtra("ingredients"));
+                intent.putExtra("directions", data.getStringExtra("directions"));
+                startActivity(intent);
+            }
+        }
     }
 }

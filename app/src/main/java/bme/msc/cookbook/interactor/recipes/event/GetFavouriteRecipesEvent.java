@@ -1,0 +1,45 @@
+package bme.msc.cookbook.interactor.recipes.event;
+
+import java.util.List;
+
+import bme.msc.cookbook.model.apiresult.Recipe;
+import bme.msc.cookbook.model.orm.FavouriteRecipe;
+
+public class GetFavouriteRecipesEvent {
+    private int code;
+    private List<FavouriteRecipe> recipes;
+    private Throwable throwable;
+
+    public GetFavouriteRecipesEvent() {
+    }
+
+    public GetFavouriteRecipesEvent(int code, List<FavouriteRecipe> recipes, Throwable throwable) {
+        this.code = code;
+        this.recipes = recipes;
+        this.throwable = throwable;
+    }
+
+    public int getCode() {
+        return code;
+    }
+
+    public void setCode(int code) {
+        this.code = code;
+    }
+
+    public List<FavouriteRecipe> getRecipes() {
+        return recipes;
+    }
+
+    public void setRecipes(List<FavouriteRecipe> recipes) {
+        this.recipes = recipes;
+    }
+
+    public Throwable getThrowable() {
+        return throwable;
+    }
+
+    public void setThrowable(Throwable throwable) {
+        this.throwable = throwable;
+    }
+}

@@ -30,31 +30,26 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:23.2.1'
-    compile 'com.android.support:cardview-v7:23.2.1'
-    compile 'com.android.support:design:23.2.1'
+
+    compile 'com.android.support:appcompat-v7:23.3.0'
+    compile 'com.android.support:cardview-v7:23.3.0'
+    compile 'com.android.support:preference-v7:23.3.0'
+    compile 'com.android.support:design:23.3.0'
     compile 'com.squareup.retrofit2:retrofit:2.0.0-beta4'
     compile 'com.squareup.retrofit2:converter-gson:2.0.0-beta4'
     compile 'com.google.code.gson:gson:2.4'
     compile 'com.github.bumptech.glide:glide:3.7.0'
     compile 'org.greenrobot:eventbus:3.0.0'
     compile 'com.jakewharton:butterknife:7.0.1'
+    compile 'com.android.support:support-v4:23.3.0'
+    compile 'com.github.satyan:sugar:1.4'
 
     // Dagger 2 and Compiler
-    compile "com.google.dagger:dagger-compiler:2.0.1"
+    compile 'com.google.dagger:dagger-compiler:2.0.1'
     compile 'com.google.dagger:dagger:2.0.1'
     apt "com.google.dagger:dagger-compiler:2.0.1"
     // Required for @Generated annotation (missing in Java <= 1.6; therefore, Android)
     provided 'javax.annotation:jsr250-api:1.0'
-
-    // MaterialDrawer (by mikepenz - https://github.com/mikepenz/MaterialDrawer)
-    compile('com.mikepenz:materialdrawer:5.1.8@aar') {
-        transitive = true
-    }
-    compile 'com.mikepenz:google-material-typeface:2.2.0.1.original@aar'
-    compile 'com.mikepenz:material-design-iconic-typeface:2.2.0.1@aar'
-    compile 'com.mikepenz:fontawesome-typeface:4.5.0.1@aar'
-    compile 'com.mikepenz:ionicons-typeface:2.0.1.1@aar'
 
     //JVM Test
     //JUnit
@@ -74,4 +69,13 @@ dependencies {
     testCompile 'com.google.dagger:dagger:2.0.1'
     testApt "com.google.dagger:dagger-compiler:2.0.1"
     testCompile 'javax.annotation:jsr250-api:1.0'
+
+    // MaterialDrawer (by mikepenz - https://github.com/mikepenz/MaterialDrawer)
+    compile('com.mikepenz:materialdrawer:5.1.8@aar') {
+        transitive = true
+    }
+    compile 'com.mikepenz:fontawesome-typeface:4.5.0.1@aar'
+
+    //Google Analytics
+    compile 'com.google.android.gms:play-services-analytics:8.4.0'
 }
