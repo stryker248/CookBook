@@ -146,7 +146,7 @@ public class NewRecipeFragment extends Fragment implements NewRecipeScreen {
     }
 
     @Override
-    public void addCategories(List<Category> categories) {
+    public void showCategories(List<Category> categories) {
         ArrayAdapter<Category> dataAdapter = new ArrayAdapter<>(
                 getContext(), R.layout.support_simple_spinner_dropdown_item, categories);
         spnnrCategory.setAdapter(dataAdapter);

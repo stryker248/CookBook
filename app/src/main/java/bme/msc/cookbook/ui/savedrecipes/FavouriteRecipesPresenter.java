@@ -70,13 +70,8 @@ public class FavouriteRecipesPresenter extends Presenter<FavouriteRecipesScreen>
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEventMainThread(final RemoveRecipeFromFavouritesEvent event) {
-        networkExecutor.execute(new Runnable() {
-            @Override
-            public void run() {
-                recipesInteractor.removeRecipeFromFavourites(event.getId());
-            }
-        });
+    public void onEventMainThread(RemoveRecipeFromFavouritesEvent event) {
+        removeRecipeFromFavourites(event.getId());
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)

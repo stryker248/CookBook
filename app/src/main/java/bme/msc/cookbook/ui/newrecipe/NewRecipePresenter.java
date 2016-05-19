@@ -82,7 +82,7 @@ public class NewRecipePresenter extends Presenter<NewRecipeScreen> {
             }
         } else {
             if (screen != null) {
-                screen.addCategories(event.getCategories());
+                screen.showCategories(event.getCategories());
             }
         }
     }

@@ -6,7 +6,7 @@ import bme.msc.cookbook.model.apiresult.Category;
 import bme.msc.cookbook.model.apiresult.Recipe;
 
 public interface NewRecipeScreen {
-    void addCategories(List<Category> categories);
+    void showCategories(List<Category> categories);
 
     void showNewRecipe(Recipe recipe);
 

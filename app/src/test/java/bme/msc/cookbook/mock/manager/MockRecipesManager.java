@@ -56,39 +56,12 @@ public class MockRecipesManager implements RecipesManager {
 
     @Override
     public boolean addRecipeToFavourites(Recipe recipe) {
-        for (FavouriteRecipe r : favouriteRecipes) {
-            if (r.getId().equals(recipe.getId())) {
-                return false;
-            }
-        }
-
-        FavouriteRecipe newRecipe = new FavouriteRecipe(
-                recipe.getId(),
-                recipe.getName(),
-                recipe.getImgUrl(),
-                recipe.getTotalTime(),
-                recipe.getRating(),
-                recipe.getIngredients(),
-                recipe.getDirections(),
-                recipe.getCategory(),
-                new Date()
-        );
-        favouriteRecipes.add(newRecipe);
         return true;
     }
 
     @Override
     public void removeRecipeFromFavourites(Long id) {
-        FavouriteRecipe recipe = null;
-        for (FavouriteRecipe r : favouriteRecipes) {
-            if (r.getId().equals(id)) {
-                recipe = r;
-            }
-        }
-
-        if (recipe != null) {
-            favouriteRecipes.remove(recipe);
-        }
+        
     }
 
     @Override
