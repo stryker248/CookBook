@@ -10,6 +10,7 @@ import org.robolectric.annotation.Config;
 import java.util.List;
 
 import bme.msc.cookbook.BuildConfig;
+import bme.msc.cookbook.interactor.recipes.event.AddRecipeToFavouritesEvent;
 import bme.msc.cookbook.model.apiresult.Recipe;
 import bme.msc.cookbook.ui.recipedetails.RecipeDetailsScreen;
 import bme.msc.cookbook.ui.recipedetails.RecipeSummaryPresenter;
@@ -41,6 +42,15 @@ public class RecipeDetails {
         ArgumentCaptor<Recipe> recipeCaptor = ArgumentCaptor.forClass(Recipe.class);
         verify(recipeDetailsScreen).updateRecipe(recipeCaptor.capture());
         assertTrue(recipeCaptor.getValue() != null);
+    }
+
+    @Test
+    public void testAddRecipeToFavourites() {
+        recipeSummaryPresenter.addRecipeToFavourites(new Recipe());
+
+        ArgumentCaptor<String> messageCaptor = ArgumentCaptor.forClass(String.class);
+        verify(recipeDetailsScreen).showMessage(messageCaptor.capture());
+        assertTrue(messageCaptor.getValue() != null);
     }
 
     @After

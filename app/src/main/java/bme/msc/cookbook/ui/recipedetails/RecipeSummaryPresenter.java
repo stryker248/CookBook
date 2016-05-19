@@ -16,6 +16,7 @@ import bme.msc.cookbook.interactor.recipes.RecipesInteractor;
 import bme.msc.cookbook.interactor.recipes.event.AddRecipeToFavouritesEvent;
 import bme.msc.cookbook.interactor.recipes.event.RateRecipeEvent;
 import bme.msc.cookbook.interactor.recipes.event.RecipeAddedToFavouritesEvent;
+import bme.msc.cookbook.model.apiresult.Recipe;
 import bme.msc.cookbook.ui.Presenter;
 
 public class RecipeSummaryPresenter extends Presenter<RecipeDetailsScreen> {
@@ -57,6 +58,15 @@ public class RecipeSummaryPresenter extends Presenter<RecipeDetailsScreen> {
         });
     }
 
+    public void addRecipeToFavourites(final Recipe recipe) {
+        networkExecutor.execute(new Runnable() {
+            @Override
+            public void run() {
+                recipesInteractor.addRecipeToFavourites(recipe);
+            }
+        });
+    }
+
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEventMainThread(final RateRecipeEvent event) {
         if (event.getThrowable() != null) {
@@ -73,12 +83,7 @@ public class RecipeSummaryPresenter extends Presenter<RecipeDetailsScreen> {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEventMainThread(final AddRecipeToFavouritesEvent event) {
-        networkExecutor.execute(new Runnable() {
-            @Override
-            public void run() {
-                recipesInteractor.addRecipeToFavourites(event.getRecipe());
-            }
-        });
+        addRecipeToFavourites(event.getRecipe());
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)

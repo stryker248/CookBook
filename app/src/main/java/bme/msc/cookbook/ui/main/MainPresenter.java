@@ -46,6 +46,15 @@ public class MainPresenter extends Presenter<MainScreen> {
         });
     }
 
+    public void removeRecipeFromFavourites(final Long id) {
+        networkExecutor.execute(new Runnable() {
+            @Override
+            public void run() {
+                recipesInteractor.removeRecipeFromFavourites(id);
+            }
+        });
+    }
+
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEventMainThread(final GetFavouriteRecipesEvent event) {
         if (event.getThrowable() != null) {
@@ -62,12 +71,7 @@ public class MainPresenter extends Presenter<MainScreen> {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEventMainThread(final RemoveRecipeFromFavouritesEvent event) {
-        networkExecutor.execute(new Runnable() {
-            @Override
-            public void run() {
-                recipesInteractor.removeRecipeFromFavourites(event.getId());
-            }
-        });
+        removeRecipeFromFavourites(event.getId());
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)

@@ -10,6 +10,7 @@ import org.robolectric.annotation.Config;
 import java.util.List;
 
 import bme.msc.cookbook.BuildConfig;
+import bme.msc.cookbook.interactor.recipes.event.RemoveRecipeFromFavouritesEvent;
 import bme.msc.cookbook.ui.main.MainPresenter;
 import bme.msc.cookbook.ui.main.MainScreen;
 import bme.msc.cookbook.utils.RobolectricDaggerTestRunner;
@@ -40,6 +41,16 @@ public class MainTest {
         ArgumentCaptor<List> recipesCaptor = ArgumentCaptor.forClass(List.class);
         verify(mainScreen).showRecipes(recipesCaptor.capture());
         assertTrue(recipesCaptor.getValue().size() > 0);
+    }
+
+    @Test
+    public void testRemoveRecipeFromFavourites() {
+        mainPresenter.removeRecipeFromFavourites(1L);
+
+        ArgumentCaptor<String> messageCaptor = ArgumentCaptor.forClass(String.class);
+        verify(mainScreen).removeRecipe(1L);
+        verify(mainScreen).showMessage(messageCaptor.capture());
+        assertTrue(messageCaptor.getValue() != null);
     }
 
     @After

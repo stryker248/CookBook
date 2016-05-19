@@ -15,7 +15,6 @@
         android:id="@+id/savedrecipes_own_tvEmpty"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/savedrecipes_own_recyclerViewRecipes"
         android:gravity="center"
         android:text="You do not add any recipes."/>
 

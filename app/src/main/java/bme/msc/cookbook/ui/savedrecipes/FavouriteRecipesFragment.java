@@ -98,6 +98,11 @@ public class FavouriteRecipesFragment extends Fragment implements FavouriteRecip
         if (recipe != null) {
             recipesList.remove(recipe);
             recipesAdapter.notifyDataSetChanged();
+
+            if(recipesList.isEmpty()) {
+                recyclerViewRecipes.setVisibility(View.GONE);
+                tvEmpty.setVisibility(View.VISIBLE);
+            }
         }
     }
 

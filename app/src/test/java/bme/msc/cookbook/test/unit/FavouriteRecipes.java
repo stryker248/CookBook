@@ -46,11 +46,9 @@ public class FavouriteRecipes {
     public void testRemoveRecipeFromFavourites() {
         favouriteRecipesPresenter.removeRecipeFromFavourites(1L);
 
-        ArgumentCaptor<Long> idCaptor = ArgumentCaptor.forClass(Long.class);
         ArgumentCaptor<String> messageCaptor = ArgumentCaptor.forClass(String.class);
-        verify(favouriteRecipesScreen).removeRecipe(idCaptor.capture());
+        verify(favouriteRecipesScreen).removeRecipe(1L);
         verify(favouriteRecipesScreen).showMessage(messageCaptor.capture());
-        assertTrue(idCaptor.getValue() > 0);
         assertTrue(messageCaptor.getValue().length() > 0);
     }
 

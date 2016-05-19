@@ -56,6 +56,15 @@ public class RecipesPresenter extends Presenter<RecipesScreen> {
         });
     }
 
+    public void addRecipeToFavourites(final Recipe recipe) {
+        networkExecutor.execute(new Runnable() {
+            @Override
+            public void run() {
+                recipesInteractor.addRecipeToFavourites(recipe);
+            }
+        });
+    }
+
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEventMainThread(final GetRecipesEvent event) {
         if (event.getThrowable() != null) {
@@ -72,12 +81,7 @@ public class RecipesPresenter extends Presenter<RecipesScreen> {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEventMainThread(final AddRecipeToFavouritesEvent event) {
-        networkExecutor.execute(new Runnable() {
-            @Override
-            public void run() {
-                recipesInteractor.addRecipeToFavourites(event.getRecipe());
-            }
-        });
+        addRecipeToFavourites(event.getRecipe());
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
